@@ -1,0 +1,71 @@
+name: Sense Plans and Pricing
+description: >-
+  Sense operates a one-time hardware purchase model with no recurring
+  subscription fees. The Sense Monitor is a physical device installed in the
+  home electrical panel that connects to the Sense cloud platform. All app
+  features, device detection improvements, firmware updates, and API access are
+  included with the hardware purchase. A utility-partnership track provides
+  access through smart meter installations at no cost to the homeowner, funded
+  through state energy efficiency incentive programs.
+specificationVersion: '0.1'
+plans:
+  - name: Sense Home Energy Monitor
+    description: >-
+      One-time hardware purchase providing lifetime access to the Sense app,
+      real-time energy monitoring, device detection via machine learning, solar
+      production tracking, usage history, custom alerts, and API access. No
+      monthly fees or subscriptions required. Includes ongoing firmware updates
+      and device detection model improvements.
+    url: https://sense.com/homes/buy-monitor/
+    price: '299.00'
+    currency: USD
+    unit: one-time
+    features:
+      - Real-time whole-home electricity monitoring
+      - Machine learning device detection and disaggregation
+      - Historical trend data (daily, weekly, monthly, annual, billing cycle)
+      - Mobile app (iOS and Android)
+      - Web portal access at home.sense.com
+      - REST API access via api.sense.com
+      - WebSocket realtime data feed
+      - Amazon Alexa integration
+      - Push notifications and custom alerts
+      - Firmware updates included
+      - Customer support included
+  - name: Sense Home Energy Monitor with Solar
+    description: >-
+      One-time hardware purchase for homes with solar installations, including
+      two current transformers for both grid consumption and solar production
+      monitoring. All features of the standard monitor plus dedicated solar
+      production tracking, grid export measurements, and net energy metering
+      data. No monthly fees or subscriptions.
+    url: https://sense.com/homes/buy-monitor/
+    price: '349.00'
+    currency: USD
+    unit: one-time
+    features:
+      - All standard monitor features
+      - Solar production monitoring
+      - Grid export (to-grid) measurement
+      - Net energy metering (NEM) tracking
+      - Solar vs. grid consumption breakdown
+      - Dual current transformer hardware included
+  - name: Utility Smart Meter Integration
+    description: >-
+      Free access to Sense energy intelligence through a Sense-enabled smart
+      meter installed by an eligible utility partner. Homeowners in service
+      territories where Sense has partnered with the utility receive app access
+      and energy insights at no charge. Funded through state energy efficiency
+      incentive programs paid to Sense when users reduce or shift energy
+      consumption.
+    url: https://sense.com/homes/buy-monitor/
+    price: '0.00'
+    currency: USD
+    unit: free
+    features:
+      - Energy usage insights via Sense mobile app
+      - Device detection and disaggregation (where available)
+      - Usage history and trend data
+      - Energy saving recommendations
+      - No hardware installation required
+      - Eligible utilities include National Grid, Tipmont, PGE, Rhode Island Energy

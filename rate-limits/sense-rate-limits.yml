@@ -1,0 +1,64 @@
+name: Sense Rate Limits
+description: >-
+  Sense applies rate limits to both the REST Client API and the WebSocket
+  Realtime API to protect platform stability and ensure consistent service
+  quality across all connected monitors. The Client API imposes a default
+  request cap of 60 calls per minute per authenticated session. The Realtime
+  WebSocket feed delivers data continuously but the reference implementation
+  enforces a polling interval of one update per 30 seconds for derived
+  real-time polling patterns. Authentication tokens should be refreshed no more
+  frequently than once every 15 to 20 minutes to avoid triggering server-side
+  auth throttling. API requests time out after 5 seconds by default.
+specificationVersion: '0.1'
+limits:
+  - name: Client API Request Rate
+    description: >-
+      The Sense REST Client API (api.sense.com/apiservice/api/v1) enforces a
+      default limit of 60 requests per minute per authenticated access token.
+      Exceeding this limit may result in temporary throttling of subsequent
+      requests.
+    limit: 60
+    unit: requests
+    period: minute
+    scope: per-token
+  - name: Realtime Feed Polling Interval
+    description: >-
+      When polling real-time data via derived REST calls rather than the
+      WebSocket feed, clients should request updates no more frequently than
+      once every 30 seconds. The reference Python library enforces this as a
+      default rate limit on the get_realtime() method, configurable via the
+      rate_limit attribute.
+    limit: 1
+    unit: requests
+    period: 30 seconds
+    scope: per-session
+  - name: Authentication Token Refresh
+    description: >-
+      Authentication against the Sense credential endpoint should occur no more
+      frequently than once every 15 to 20 minutes. Applications should cache
+      the access token and use the refresh token mechanism to extend sessions
+      rather than re-authenticating on every run.
+    limit: 1
+    unit: authentication
+    period: 15-20 minutes
+    scope: per-account
+  - name: Software Version Check
+    description: >-
+      Monitor software version checks are performed at most once per day.
+      Clients should cache the version response and not poll the version
+      endpoint more frequently than the 86,400 second interval.
+    limit: 1
+    unit: requests
+    period: 86400 seconds
+    scope: per-monitor
+  - name: WebSocket Connection
+    description: >-
+      The Sense Realtime WebSocket feed at clientrt.sense.com maintains a
+      persistent connection per authenticated monitor session. The connection
+      uses a 5 second timeout for establishment. Clients should maintain a
+      single persistent connection rather than repeatedly connecting and
+      disconnecting.
+    limit: 1
+    unit: connections
+    period: session
+    scope: per-monitor

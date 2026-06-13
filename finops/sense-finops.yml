@@ -1,0 +1,102 @@
+name: Sense FinOps
+description: >-
+  Sense uses a one-time hardware purchase model, which means API and platform
+  costs are fixed at the point of device acquisition rather than variable based
+  on usage volume. There are no metered API call charges, data transfer fees,
+  or subscription costs associated with using the Sense Client API or Realtime
+  WebSocket feed. FinOps considerations for Sense center on the initial capital
+  expenditure for monitor hardware, potential return on investment from energy
+  savings achieved through monitoring insights, and for utility partners, the
+  program incentive structures tied to measurable demand reduction.
+specificationVersion: '1.0'
+currency: USD
+costs:
+  - name: Monitor Hardware (Standard)
+    description: >-
+      One-time capital expenditure for the Sense Home Energy Monitor hardware
+      device, including installation materials. Provides lifetime API access
+      with no additional recurring costs.
+    type: CapEx
+    amount: 299.00
+    currency: USD
+    unit: one-time
+    category: Hardware
+  - name: Monitor Hardware (Solar)
+    description: >-
+      One-time capital expenditure for the Sense Home Energy Monitor with solar
+      monitoring capability. Includes dual current transformers for grid and
+      solar measurement.
+    type: CapEx
+    amount: 349.00
+    currency: USD
+    unit: one-time
+    category: Hardware
+  - name: API Access
+    description: >-
+      REST Client API (api.sense.com) and WebSocket Realtime API
+      (clientrt.sense.com) access are included at no additional cost with any
+      hardware purchase. No per-call charges, no data egress fees, no
+      subscription required.
+    type: Included
+    amount: 0.00
+    currency: USD
+    unit: included
+    category: API
+  - name: Mobile App Access
+    description: >-
+      iOS and Android mobile applications and the web portal (home.sense.com)
+      are free to download and use. No premium tier or in-app purchases.
+    type: Included
+    amount: 0.00
+    currency: USD
+    unit: included
+    category: Software
+  - name: Firmware Updates
+    description: >-
+      Ongoing over-the-air firmware updates and machine learning device
+      detection model improvements are delivered at no cost throughout the
+      product lifecycle.
+    type: Included
+    amount: 0.00
+    currency: USD
+    unit: included
+    category: Maintenance
+savings:
+  - name: Energy Reduction ROI
+    description: >-
+      Sense reports average annual energy savings of 4 to 8 percent for
+      households using the monitor. At a US average electricity rate of
+      approximately $0.16 per kWh and an average annual household usage of
+      10,500 kWh, a 6% reduction yields roughly $100 annually. The hardware
+      cost of $299 would achieve payback in approximately 3 years under average
+      conditions, with ongoing savings thereafter.
+    type: Savings
+    estimatedAnnualSavings: 63.00
+    estimatedAnnualSavingsHigh: 100.00
+    currency: USD
+    basis: 6% average energy reduction on average US household consumption
+  - name: Utility Program Incentives
+    description: >-
+      For utility-partnered deployments, Sense earns incentive payments through
+      state energy efficiency programs when customers demonstrably reduce or
+      shift electricity consumption during demand response events. Homeowners in
+      eligible territories receive free monitor access funded through these
+      program payments.
+    type: ProgramIncentive
+    amount: 0.00
+    currency: USD
+    basis: Utility program funded; no direct cost to homeowner
+notes:
+  - >-
+    Sense announced in late 2025 that it would stop selling the standalone
+    monitor by December 31, 2025. Existing monitors continue to receive full
+    support and API access at no additional cost.
+  - >-
+    The company is embedding its machine learning technology into
+    next-generation smart meters (AMI 2.0) deployed by utility partners,
+    shifting the primary distribution model from consumer hardware sales to
+    utility infrastructure partnerships.
+  - >-
+    All API access (REST and WebSocket) is authenticated via bearer tokens
+    obtained through credential authentication. No API key purchase or
+    developer account registration is required beyond owning a Sense monitor.
