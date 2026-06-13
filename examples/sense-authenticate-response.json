@@ -1,0 +1,13 @@
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjU0MzIxIn0.example",
+  "user_id": "654321",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWZyZXNoIjoidHJ1ZSJ9.example",
+  "monitors": [
+    {
+      "id": "12345",
+      "serial_number": "SN1234567890",
+      "time_zone": "America/New_York",
+      "solar_configured": false
+    }
+  ]
+}

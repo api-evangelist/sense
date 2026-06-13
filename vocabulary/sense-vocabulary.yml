@@ -1,0 +1,200 @@
+vocabulary:
+  title: Sense API Vocabulary
+  description: >-
+    Domain terms and concepts used across the Sense home energy monitoring
+    platform APIs, covering energy measurement, device detection, solar
+    production, and grid exchange.
+  provider: sense
+  version: 1.0.0
+  terms:
+    - term: monitor
+      definition: >-
+        The physical Sense device installed in a residential electrical panel
+        that captures high-resolution current waveform data for machine-learning
+        based device disaggregation.
+      aliases:
+        - Sense monitor
+        - energy monitor
+      related:
+        - monitor_id
+        - serial_number
+
+    - term: monitor_id
+      definition: >-
+        Unique numeric identifier assigned to a Sense monitor device.
+        Required as a path parameter for all monitor-scoped API calls.
+      dataType: string
+      example: '12345'
+
+    - term: disaggregation
+      definition: >-
+        The machine-learning process by which the Sense platform separates
+        whole-home electrical current signatures into individual device-level
+        consumption signatures, enabling identification of specific appliances.
+      aliases:
+        - device detection
+        - device identification
+
+    - term: always_on
+      definition: >-
+        The baseline power draw from devices and loads that never fully power
+        off — such as routers, clocks, and standby electronics. Sense
+        separately tracks and reports this constant consumption.
+      unit: watts (W)
+
+    - term: scale
+      definition: >-
+        The aggregation time window for historical energy data. Supported
+        values are DAY, WEEK, MONTH, YEAR, and CYCLE (billing cycle).
+      enumValues:
+        - DAY
+        - WEEK
+        - MONTH
+        - YEAR
+        - CYCLE
+
+    - term: device
+      definition: >-
+        An individual electrical appliance or load that Sense has identified
+        through machine-learning disaggregation. Each device has a unique ID,
+        name, icon, and real-time power reading.
+      properties:
+        - id
+        - name
+        - icon
+        - is_on
+        - power_w
+
+    - term: device_id
+      definition: >-
+        Alphanumeric unique identifier assigned by Sense to each detected
+        device. Used to query device-specific energy data and filter timelines.
+      dataType: string
+      example: abc123def456
+
+    - term: power_w
+      definition: >-
+        Instantaneous electrical power measurement in watts (W). Positive
+        values indicate consumption; used for whole-home, device-level, and
+        grid exchange readings.
+      unit: watts (W)
+      dataType: number
+
+    - term: energy_kwh
+      definition: >-
+        Cumulative electrical energy measurement in kilowatt-hours (kWh)
+        over a specified time period. Used for historical trend data and
+        device consumption totals.
+      unit: kilowatt-hours (kWh)
+      dataType: number
+
+    - term: solar_configured
+      definition: >-
+        Boolean flag on a monitor indicating whether the Sense device has
+        been configured to monitor solar panel production in addition to
+        whole-home consumption.
+      dataType: boolean
+
+    - term: solar_w
+      definition: >-
+        Current solar panel output in watts. Included in real-time feeds
+        only for monitors with solar_configured set to true.
+      unit: watts (W)
+      dataType: number
+
+    - term: production_kwh
+      definition: >-
+        Total solar energy produced over a time period in kWh.
+      unit: kilowatt-hours (kWh)
+      dataType: number
+
+    - term: from_grid_kwh
+      definition: >-
+        Energy imported from the utility grid during a time period, in kWh.
+        Occurs when home consumption exceeds solar production.
+      unit: kilowatt-hours (kWh)
+      dataType: number
+
+    - term: to_grid_kwh
+      definition: >-
+        Excess solar energy exported back to the utility grid during a time
+        period, in kWh. Occurs when solar production exceeds home consumption.
+      unit: kilowatt-hours (kWh)
+      dataType: number
+
+    - term: net_kwh
+      definition: >-
+        Net energy value calculated as solar production minus home consumption
+        over a time period, in kWh. Positive values indicate net export;
+        negative values indicate net import.
+      unit: kilowatt-hours (kWh)
+      dataType: number
+
+    - term: solar_percentage
+      definition: >-
+        The percentage of home energy consumption that was covered by solar
+        production during a time period. Value ranges from 0 to 100.
+      unit: percent (%)
+      dataType: number
+
+    - term: grid_w
+      definition: >-
+        Net real-time grid exchange in watts. Positive values indicate the
+        home is importing power from the grid; negative values indicate
+        excess solar is being exported to the grid.
+      unit: watts (W)
+      dataType: number
+
+    - term: voltage
+      definition: >-
+        Array of AC voltage readings in volts, one per electrical leg.
+        US residential panels typically report two legs (~120V each).
+      unit: volts (V)
+      dataType: array of numbers
+
+    - term: hz
+      definition: >-
+        AC grid frequency in hertz. Nominally 60 Hz in North America.
+      unit: hertz (Hz)
+      dataType: number
+
+    - term: access_token
+      definition: >-
+        Short-lived bearer token used to authenticate REST API and WebSocket
+        connections. Obtained from /authenticate or /renew. Passed as
+        "Authorization: bearer <token>" header or as a WebSocket query parameter.
+      dataType: string
+
+    - term: refresh_token
+      definition: >-
+        Long-lived token used to obtain a new access_token without re-entering
+        credentials. Pass to /renew along with user_id.
+      dataType: string
+
+    - term: mfa_token
+      definition: >-
+        Temporary token returned in a 401 response when an account has
+        multi-factor authentication enabled. Must be passed to /authenticate/mfa
+        together with a TOTP code to complete authentication.
+      dataType: string
+
+    - term: realtime_update
+      definition: >-
+        Message type delivered over the WebSocket feed or via the
+        /app/{monitor_id}/realtime_update REST endpoint containing the
+        current whole-home wattage, solar output, device states, voltage,
+        and frequency at a given instant.
+
+    - term: timeline
+      definition: >-
+        Chronological feed of device state-change events for a user's account.
+        Events include DeviceWentOn and DeviceWentOff with associated device
+        name, ID, and timestamp.
+
+    - term: rate_limit
+      definition: >-
+        The minimum interval between successive realtime REST API calls,
+        set to 60 seconds in the official Python client to avoid overloading
+        the Sense backend.
+      value: 60
+      unit: seconds

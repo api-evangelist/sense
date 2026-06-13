@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sense/main/json-schema/sense-realtime-payload.json",
+  "title": "Sense Realtime Payload",
+  "description": "Real-time power snapshot delivered via WebSocket or the /realtime_update REST endpoint. Contains whole-home wattage, solar output, grid exchange, voltage, frequency, and currently active devices.",
+  "type": "object",
+  "properties": {
+    "w": {
+      "type": "number",
+      "description": "Current whole-home power consumption in watts.",
+      "minimum": 0,
+      "example": 1234.5
+    },
+    "solar_w": {
+      "type": "number",
+      "description": "Current solar panel production in watts. Zero for non-solar monitors.",
+      "minimum": 0,
+      "example": 850.0
+    },
+    "grid_w": {
+      "type": "number",
+      "description": "Net grid exchange in watts. Positive indicates import from grid; negative indicates export to grid.",
+      "example": 384.5
+    },
+    "hz": {
+      "type": "number",
+      "description": "AC grid frequency in hertz.",
+      "minimum": 50,
+      "maximum": 70,
+      "example": 60.01
+    },
+    "voltage": {
+      "type": "array",
+      "description": "AC voltage readings per electrical leg in volts. US residential panels report two legs.",
+      "items": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 300
+      },
+      "minItems": 1,
+      "maxItems": 4,
+      "example": [121.2, 120.8]
+    },
+    "devices": {
+      "type": "array",
+      "description": "List of currently active detected devices and their power draw.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Device ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Device name"
+          },
+          "icon": {
+            "type": "string",
+            "description": "Device icon identifier"
+          },
+          "w": {
+            "type": "number",
+            "description": "Current device power consumption in watts",
+            "minimum": 0
+          }
+        },
+        "required": ["id", "name", "w"]
+      }
+    }
+  }
+}

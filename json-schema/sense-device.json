@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sense/main/json-schema/sense-device.json",
+  "title": "Sense Device",
+  "description": "A machine-learning detected electrical device in the Sense home energy monitoring system.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the device assigned by Sense.",
+      "example": "abc123def456"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable name of the device, set by Sense or customized by the user.",
+      "example": "Refrigerator"
+    },
+    "icon": {
+      "type": "string",
+      "description": "Icon identifier used to display the device in the Sense app.",
+      "example": "fridge"
+    },
+    "is_on": {
+      "type": "boolean",
+      "description": "Whether the device is currently drawing power.",
+      "example": true
+    },
+    "power_w": {
+      "type": "number",
+      "description": "Current instantaneous power draw of the device in watts.",
+      "minimum": 0,
+      "example": 150.5
+    },
+    "energy_kwh": {
+      "type": "object",
+      "description": "Cumulative energy consumption by time scale in kilowatt-hours.",
+      "properties": {
+        "DAY": {
+          "type": "number",
+          "description": "Energy consumed today in kWh.",
+          "minimum": 0
+        },
+        "WEEK": {
+          "type": "number",
+          "description": "Energy consumed this week in kWh.",
+          "minimum": 0
+        },
+        "MONTH": {
+          "type": "number",
+          "description": "Energy consumed this month in kWh.",
+          "minimum": 0
+        },
+        "YEAR": {
+          "type": "number",
+          "description": "Energy consumed this year in kWh.",
+          "minimum": 0
+        },
+        "CYCLE": {
+          "type": "number",
+          "description": "Energy consumed in the current billing cycle in kWh.",
+          "minimum": 0
+        }
+      }
+    },
+    "tags": {
+      "type": "object",
+      "description": "Additional metadata key-value pairs for the device.",
+      "additionalProperties": true
+    }
+  },
+  "required": ["id", "name"]
+}

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sense/main/json-schema/sense-usage-history.json",
+  "title": "Sense Usage History",
+  "description": "Historical energy consumption data returned by /app/monitors/{monitor_id}/history/usage. Includes total kWh and a per-device breakdown for the requested scale and time period.",
+  "type": "object",
+  "properties": {
+    "start": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC timestamp marking the start of the reported period.",
+      "example": "2026-06-13T00:00:00Z"
+    },
+    "consumption": {
+      "type": "object",
+      "description": "Aggregate consumption data for the period.",
+      "properties": {
+        "usage_total_kwh": {
+          "type": "number",
+          "description": "Total energy consumed in kWh.",
+          "minimum": 0,
+          "example": 18.42
+        }
+      },
+      "required": ["usage_total_kwh"]
+    },
+    "device_breakdown": {
+      "type": "array",
+      "description": "Per-device energy consumption breakdown.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Device ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Device name"
+          },
+          "icon": {
+            "type": "string",
+            "description": "Device icon identifier"
+          },
+          "consumption": {
+            "type": "object",
+            "properties": {
+              "usage_total_kwh": {
+                "type": "number",
+                "description": "Device energy consumption in kWh for the period.",
+                "minimum": 0
+              }
+            }
+          }
+        },
+        "required": ["id", "name"]
+      }
+    }
+  },
+  "required": ["start", "consumption"]
+}

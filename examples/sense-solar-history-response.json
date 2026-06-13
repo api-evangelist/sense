@@ -1,0 +1,9 @@
+{
+  "total": {
+    "production_kwh": 12.75,
+    "from_grid_kwh": 5.67,
+    "to_grid_kwh": 2.31,
+    "net_kwh": 7.08,
+    "solar_percentage": 68.5
+  }
+}

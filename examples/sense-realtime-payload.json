@@ -1,0 +1,21 @@
+{
+  "w": 1234.5,
+  "solar_w": 850.0,
+  "grid_w": 384.5,
+  "hz": 60.01,
+  "voltage": [121.2, 120.8],
+  "devices": [
+    {
+      "id": "abc123def456",
+      "name": "Refrigerator",
+      "icon": "fridge",
+      "w": 150.5
+    },
+    {
+      "id": "def456ghi789",
+      "name": "HVAC",
+      "icon": "hvac",
+      "w": 3200.0
+    }
+  ]
+}

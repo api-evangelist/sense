@@ -1,0 +1,48 @@
+{
+  "start": "2026-06-13T00:00:00Z",
+  "consumption": {
+    "usage_total_kwh": 18.42
+  },
+  "device_breakdown": [
+    {
+      "id": "abc123def456",
+      "name": "Refrigerator",
+      "icon": "fridge",
+      "consumption": {
+        "usage_total_kwh": 1.25
+      }
+    },
+    {
+      "id": "def456ghi789",
+      "name": "HVAC",
+      "icon": "hvac",
+      "consumption": {
+        "usage_total_kwh": 8.70
+      }
+    },
+    {
+      "id": "ghi789jkl012",
+      "name": "Water Heater",
+      "icon": "waterheater",
+      "consumption": {
+        "usage_total_kwh": 3.15
+      }
+    },
+    {
+      "id": "always_on",
+      "name": "Always On",
+      "icon": "always_on",
+      "consumption": {
+        "usage_total_kwh": 2.30
+      }
+    },
+    {
+      "id": "other",
+      "name": "Other",
+      "icon": "other",
+      "consumption": {
+        "usage_total_kwh": 3.02
+      }
+    }
+  ]
+}

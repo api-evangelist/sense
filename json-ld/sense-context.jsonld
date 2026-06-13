@@ -1,0 +1,172 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "qudt": "http://qudt.org/vocab/unit/",
+    "sense": "https://sense.com/vocab#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Monitor": "sense:Monitor",
+    "Device": "sense:Device",
+    "EnergyReading": "sense:EnergyReading",
+    "RealtimePayload": "sense:RealtimePayload",
+    "UsageHistory": "sense:UsageHistory",
+    "SolarHistory": "sense:SolarHistory",
+    "TimelineEvent": "sense:TimelineEvent",
+    "AlwaysOnInfo": "sense:AlwaysOnInfo",
+
+    "monitor_id": {
+      "@id": "sense:monitorId",
+      "@type": "xsd:string"
+    },
+    "serial_number": {
+      "@id": "sense:serialNumber",
+      "@type": "xsd:string"
+    },
+    "time_zone": {
+      "@id": "schema:temporalCoverage",
+      "@type": "xsd:string"
+    },
+    "solar_configured": {
+      "@id": "sense:solarConfigured",
+      "@type": "xsd:boolean"
+    },
+    "version": {
+      "@id": "schema:version",
+      "@type": "xsd:string"
+    },
+    "device_id": {
+      "@id": "sense:deviceId",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "icon": {
+      "@id": "sense:icon",
+      "@type": "xsd:string"
+    },
+    "is_on": {
+      "@id": "sense:isOn",
+      "@type": "xsd:boolean"
+    },
+    "power_w": {
+      "@id": "sense:powerWatts",
+      "@type": "xsd:decimal"
+    },
+    "energy_kwh": {
+      "@id": "sense:energyKilowattHours",
+      "@type": "xsd:decimal"
+    },
+    "w": {
+      "@id": "sense:powerWatts",
+      "@type": "xsd:decimal"
+    },
+    "solar_w": {
+      "@id": "sense:solarPowerWatts",
+      "@type": "xsd:decimal"
+    },
+    "grid_w": {
+      "@id": "sense:gridExchangeWatts",
+      "@type": "xsd:decimal"
+    },
+    "hz": {
+      "@id": "sense:frequencyHertz",
+      "@type": "xsd:decimal"
+    },
+    "voltage": {
+      "@id": "sense:voltageVolts",
+      "@container": "@list"
+    },
+    "production_kwh": {
+      "@id": "sense:solarProductionKwh",
+      "@type": "xsd:decimal"
+    },
+    "from_grid_kwh": {
+      "@id": "sense:fromGridKwh",
+      "@type": "xsd:decimal"
+    },
+    "to_grid_kwh": {
+      "@id": "sense:toGridKwh",
+      "@type": "xsd:decimal"
+    },
+    "net_kwh": {
+      "@id": "sense:netEnergyKwh",
+      "@type": "xsd:decimal"
+    },
+    "solar_percentage": {
+      "@id": "sense:solarPercentage",
+      "@type": "xsd:decimal"
+    },
+    "usage_total_kwh": {
+      "@id": "sense:usageTotalKwh",
+      "@type": "xsd:decimal"
+    },
+    "always_on": {
+      "@id": "sense:alwaysOnWatts",
+      "@type": "xsd:decimal"
+    },
+    "access_token": {
+      "@id": "sense:accessToken",
+      "@type": "xsd:string"
+    },
+    "refresh_token": {
+      "@id": "sense:refreshToken",
+      "@type": "xsd:string"
+    },
+    "user_id": {
+      "@id": "sense:userId",
+      "@type": "xsd:string"
+    },
+    "scale": {
+      "@id": "sense:aggregationScale",
+      "@type": "xsd:string"
+    },
+    "start": {
+      "@id": "schema:startDate",
+      "@type": "xsd:dateTime"
+    },
+    "devices": {
+      "@id": "sense:devices",
+      "@container": "@list"
+    },
+    "device_breakdown": {
+      "@id": "sense:deviceBreakdown",
+      "@container": "@list"
+    },
+    "consumption": {
+      "@id": "sense:consumption"
+    },
+    "production": {
+      "@id": "sense:solarProduction"
+    },
+    "total": {
+      "@id": "sense:total"
+    },
+    "wifi_strength": {
+      "@id": "sense:wifiStrengthDbm",
+      "@type": "xsd:integer"
+    },
+    "ndevices_found": {
+      "@id": "sense:devicesFound",
+      "@type": "xsd:integer"
+    },
+    "detection_running": {
+      "@id": "sense:detectionRunning",
+      "@type": "xsd:boolean"
+    },
+    "type": {
+      "@id": "sense:eventType",
+      "@type": "xsd:string"
+    },
+    "time": {
+      "@id": "schema:dateTime",
+      "@type": "xsd:dateTime"
+    },
+    "n_items": {
+      "@id": "sense:itemCount",
+      "@type": "xsd:integer"
+    }
+  }
+}

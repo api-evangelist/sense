@@ -65,6 +65,8 @@ apis:
         url: https://www.linkedin.com/company/senseenergy
       - type: X
         url: https://x.com/sense
+      - type: OpenAPI
+        url: openapi/sense-sense-client-api-openapi.yml
       - type: Plans
         url: plans/sense-plans-pricing.yml
       - type: RateLimits
