@@ -16,7 +16,7 @@ description: >-
   meters deployed by utility partners, expanding its reach to tens of millions
   of homes without requiring standalone hardware purchases.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/sense/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -42,7 +42,7 @@ apis:
       billing cycle. The API returns device-level disaggregation data showing
       individual appliance consumption, grid exchange metrics, and monitor
       health information.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://sense.com
     baseURL: https://api.sense.com/apiservice/api/v1
     tags:
@@ -84,7 +84,7 @@ apis:
       machine-learning identified devices. Clients authenticate using a bearer
       token obtained from the Client API and connect to the secure WebSocket
       endpoint parameterized with the monitor ID.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://sense.com
     baseURL: wss://clientrt.sense.com/monitors
     tags:
