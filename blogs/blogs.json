@@ -2,6 +2,20 @@
   "repo": "sense",
   "feeds": [
     {
+      "source": "https://sense.com/wp-json/wp/v2/consumer-blog",
+      "feed_url": "https://sense.com/wp-json/wp/v2/consumer-blog",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
+      "source": "https://status.sense.com/history.atom",
+      "feed_url": "https://status.sense.com/history.atom",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
       "source": "https://status.sense.com",
       "feed_url": "https://status.sense.com/history.atom",
       "title": "",
@@ -13,6 +27,6 @@
       "error": "HTTPError"
     }
   ],
-  "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 1,
+  "fetched": "2026-06-27T12:03:07Z"
 }
