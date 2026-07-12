@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/sense-sense-client-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  description: 'Bearer token obtained from the /authenticate or /renew endpoints. Include as
+    "Authorization: bearer <access_token>" header.'
+  sources:
+  - openapi/sense-sense-client-api-openapi.yml
