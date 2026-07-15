@@ -107,6 +107,8 @@ apis:
       - type: FinOps
         url: finops/sense-finops.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/sense-agentic-access.yml
   - type: DomainSecurity
     url: security/sense-domain-security.yml
   - type: Authentication
