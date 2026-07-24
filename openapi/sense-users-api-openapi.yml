@@ -1,0 +1,103 @@
+openapi: 3.0.3
+info:
+  title: Sense Client Authentication Users API
+  description: The Sense Client REST API provides access to historical trend data and account information for Sense home energy monitors. Authenticated users can retrieve aggregated energy consumption and solar production statistics across configurable time scales including day, week, month, year, and billing cycle. The API returns device-level disaggregation data showing individual appliance consumption, grid exchange metrics, and monitor health information.
+  version: 1.0.0
+  contact:
+    name: Sense Support
+    url: https://help.sense.com
+servers:
+- url: https://api.sense.com/apiservice/api/v1
+  description: Sense REST API
+security:
+- BearerAuth: []
+tags:
+- name: Users
+  description: User-level timeline and usage data
+paths:
+  /users/{user_id}/timeline:
+    get:
+      operationId: getUserTimeline
+      summary: Get user usage timeline
+      description: Retrieve a timeline of usage events and device activity for the authenticated user. Supports pagination and filtering by device.
+      tags:
+      - Users
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The user's Sense user ID
+        example: '654321'
+      - name: n_items
+        in: query
+        schema:
+          type: integer
+          default: 30
+        description: Number of timeline items to return
+        example: 30
+      - name: device_id
+        in: query
+        schema:
+          type: string
+        description: Filter results to a specific device ID
+      - name: prior_to_item
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: Return items prior to this date/time (YYYY-MM-DDTHH:MM:SS.mmmZ)
+      - name: rollup
+        in: query
+        schema:
+          type: string
+        description: Optional rollup grouping parameter
+      responses:
+        '200':
+          description: User timeline data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimelineResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+components:
+  schemas:
+    TimelineResponse:
+      type: object
+      description: User activity timeline with device events
+      properties:
+        items:
+          type: array
+          description: Timeline event items
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: Event type (e.g. DeviceWentOn, DeviceWentOff)
+                example: DeviceWentOn
+              time:
+                type: string
+                format: date-time
+                description: When the event occurred
+              device_id:
+                type: string
+                description: Device involved in the event
+              device_name:
+                type: string
+                description: Name of the device
+              user_device_type:
+                type: string
+                description: Device category
+        total_items:
+          type: integer
+          description: Total number of items matching the filter
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Bearer token obtained from the /authenticate or /renew endpoints. Include as "Authorization: bearer <access_token>" header.'

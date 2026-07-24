@@ -1,0 +1,182 @@
+openapi: 3.0.3
+info:
+  title: Sense Client Authentication History API
+  description: The Sense Client REST API provides access to historical trend data and account information for Sense home energy monitors. Authenticated users can retrieve aggregated energy consumption and solar production statistics across configurable time scales including day, week, month, year, and billing cycle. The API returns device-level disaggregation data showing individual appliance consumption, grid exchange metrics, and monitor health information.
+  version: 1.0.0
+  contact:
+    name: Sense Support
+    url: https://help.sense.com
+servers:
+- url: https://api.sense.com/apiservice/api/v1
+  description: Sense REST API
+security:
+- BearerAuth: []
+tags:
+- name: History
+  description: Historical energy usage and solar production data
+paths:
+  /app/monitors/{monitor_id}/history/usage:
+    get:
+      operationId: getUsageHistory
+      summary: Get historical energy usage
+      description: Retrieve historical energy consumption data aggregated at the specified scale (DAY, WEEK, MONTH, YEAR, or CYCLE). Returns total usage in kWh with a device-level breakdown showing individual appliance consumption.
+      tags:
+      - History
+      parameters:
+      - $ref: '#/components/parameters/MonitorId'
+      - name: scale
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - DAY
+          - WEEK
+          - MONTH
+          - YEAR
+          - CYCLE
+        description: The time scale for aggregation
+        example: DAY
+      - name: start
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+        description: Start date/time in ISO 8601 format (UTC)
+        example: '2026-06-13T00:00:00'
+      responses:
+        '200':
+          description: Historical usage data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageHistoryResponse'
+        '401':
+          description: Unauthorized
+  /app/monitors/{monitor_id}/history/usage/solar:
+    get:
+      operationId: getSolarHistory
+      summary: Get historical solar production data
+      description: Retrieve historical solar production data for monitors with solar configured. Returns production totals, grid exchange (from_grid_kwh, to_grid_kwh), net production, and solar percentage of consumption for the requested scale and start date.
+      tags:
+      - History
+      parameters:
+      - $ref: '#/components/parameters/MonitorId'
+      - name: scale
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - DAY
+          - WEEK
+          - MONTH
+          - YEAR
+          - CYCLE
+        description: The time scale for aggregation
+        example: DAY
+      - name: start
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+        description: Start date/time in ISO 8601 format (UTC)
+        example: '2026-06-13T00:00:00'
+      responses:
+        '200':
+          description: Historical solar data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SolarHistoryResponse'
+        '401':
+          description: Unauthorized
+components:
+  parameters:
+    MonitorId:
+      name: monitor_id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The Sense monitor's unique numeric ID
+      example: '12345'
+  schemas:
+    SolarHistoryResponse:
+      type: object
+      description: Historical solar production and grid exchange data
+      properties:
+        total:
+          type: object
+          properties:
+            production_kwh:
+              type: number
+              format: float
+              description: Total solar energy produced in kWh
+              example: 12.75
+            from_grid_kwh:
+              type: number
+              format: float
+              description: Energy imported from the grid in kWh
+              example: 5.67
+            to_grid_kwh:
+              type: number
+              format: float
+              description: Excess solar energy exported to the grid in kWh
+              example: 2.31
+            net_kwh:
+              type: number
+              format: float
+              description: Net energy (production minus consumption) in kWh
+              example: 7.08
+            solar_percentage:
+              type: number
+              format: float
+              description: Percentage of consumption covered by solar (0-100)
+              example: 68.5
+    UsageHistoryResponse:
+      type: object
+      description: Historical energy consumption data
+      properties:
+        start:
+          type: string
+          format: date-time
+          description: Start of the reported period
+          example: '2026-06-13T00:00:00Z'
+        consumption:
+          type: object
+          properties:
+            usage_total_kwh:
+              type: number
+              format: float
+              description: Total energy consumed in kWh for the period
+              example: 18.42
+        device_breakdown:
+          type: array
+          description: Per-device energy breakdown
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Device ID
+              name:
+                type: string
+                description: Device name
+              icon:
+                type: string
+                description: Device icon identifier
+              consumption:
+                type: object
+                properties:
+                  usage_total_kwh:
+                    type: number
+                    format: float
+                    description: Device's total energy consumption in kWh
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Bearer token obtained from the /authenticate or /renew endpoints. Include as "Authorization: bearer <access_token>" header.'

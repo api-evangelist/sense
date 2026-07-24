@@ -1,0 +1,223 @@
+openapi: 3.0.3
+info:
+  title: Sense Client Authentication Devices API
+  description: The Sense Client REST API provides access to historical trend data and account information for Sense home energy monitors. Authenticated users can retrieve aggregated energy consumption and solar production statistics across configurable time scales including day, week, month, year, and billing cycle. The API returns device-level disaggregation data showing individual appliance consumption, grid exchange metrics, and monitor health information.
+  version: 1.0.0
+  contact:
+    name: Sense Support
+    url: https://help.sense.com
+servers:
+- url: https://api.sense.com/apiservice/api/v1
+  description: Sense REST API
+security:
+- BearerAuth: []
+tags:
+- name: Devices
+  description: Device-level energy data and device information
+paths:
+  /app/monitors/{monitor_id}/devices:
+    get:
+      operationId: getDiscoveredDevices
+      summary: List discovered devices
+      description: Retrieve the list of devices that Sense has identified through machine-learning disaggregation. Each device entry includes the device ID, name, icon identifier, and current on/off status.
+      tags:
+      - Devices
+      parameters:
+      - $ref: '#/components/parameters/MonitorId'
+      responses:
+        '200':
+          description: List of discovered devices
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Device'
+        '401':
+          description: Unauthorized
+  /app/monitors/{monitor_id}/devices/overview:
+    get:
+      operationId: getDevicesOverview
+      summary: Get devices overview
+      description: Retrieve an overview of all detected devices including their current power consumption and identification status. Used by the async client to fetch device lists.
+      tags:
+      - Devices
+      parameters:
+      - $ref: '#/components/parameters/MonitorId'
+      responses:
+        '200':
+          description: Device overview data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevicesOverviewResponse'
+        '401':
+          description: Unauthorized
+  /app/monitors/{monitor_id}/devices/always_on:
+    get:
+      operationId: getAlwaysOnInfo
+      summary: Get always-on device info
+      description: Retrieve information about always-on power consumption — devices and loads that draw power continuously. This mirrors the always-on section in the Sense web application.
+      tags:
+      - Devices
+      parameters:
+      - $ref: '#/components/parameters/MonitorId'
+      responses:
+        '200':
+          description: Always-on device information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlwaysOnResponse'
+        '401':
+          description: Unauthorized
+  /app/monitors/{monitor_id}/devices/{device_id}:
+    get:
+      operationId: getDeviceInfo
+      summary: Get specific device information
+      description: Retrieve detailed information about a specific detected device, including its name, icon, current power, and energy history.
+      tags:
+      - Devices
+      parameters:
+      - $ref: '#/components/parameters/MonitorId'
+      - name: device_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The device ID returned from the devices list
+        example: abc123def456
+      responses:
+        '200':
+          description: Device detail data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceDetail'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Device not found
+  /monitors/{monitor_id}/devices:
+    get:
+      operationId: getRawDeviceData
+      summary: Get raw device data
+      description: Retrieve raw device data from the legacy (non-app) endpoint. Returns the complete device list with all properties.
+      tags:
+      - Devices
+      parameters:
+      - $ref: '#/components/parameters/MonitorId'
+      responses:
+        '200':
+          description: Raw device list data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Device'
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    DeviceDetail:
+      type: object
+      description: Detailed information for a specific device
+      allOf:
+      - $ref: '#/components/schemas/Device'
+      - type: object
+        properties:
+          energy_kwh:
+            type: object
+            description: Energy consumption by time scale
+            properties:
+              DAY:
+                type: number
+                format: float
+                description: Daily energy in kWh
+              WEEK:
+                type: number
+                format: float
+                description: Weekly energy in kWh
+              MONTH:
+                type: number
+                format: float
+                description: Monthly energy in kWh
+              YEAR:
+                type: number
+                format: float
+                description: Annual energy in kWh
+    Device:
+      type: object
+      description: A machine-learning detected electrical device
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the device
+          example: abc123def456
+        name:
+          type: string
+          description: Human-readable device name assigned by Sense or the user
+          example: Refrigerator
+        icon:
+          type: string
+          description: Icon identifier for displaying in the app
+          example: fridge
+        is_on:
+          type: boolean
+          description: Whether the device is currently drawing power
+          example: true
+        power_w:
+          type: number
+          format: float
+          description: Current power consumption in watts
+          example: 150.5
+        tags:
+          type: object
+          additionalProperties: true
+          description: Additional metadata tags for the device
+    DevicesOverviewResponse:
+      type: object
+      description: Overview of all detected devices
+      properties:
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Device'
+        total_count:
+          type: integer
+          description: Total number of detected devices
+    AlwaysOnResponse:
+      type: object
+      description: Always-on load information
+      properties:
+        always_on:
+          type: number
+          format: float
+          description: Total always-on wattage
+          example: 312.4
+        components:
+          type: array
+          description: Individual always-on components
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              watts:
+                type: number
+                format: float
+  parameters:
+    MonitorId:
+      name: monitor_id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The Sense monitor's unique numeric ID
+      example: '12345'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Bearer token obtained from the /authenticate or /renew endpoints. Include as "Authorization: bearer <access_token>" header.'

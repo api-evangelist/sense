@@ -1,0 +1,209 @@
+openapi: 3.0.3
+info:
+  title: Sense Client Authentication Monitors API
+  description: The Sense Client REST API provides access to historical trend data and account information for Sense home energy monitors. Authenticated users can retrieve aggregated energy consumption and solar production statistics across configurable time scales including day, week, month, year, and billing cycle. The API returns device-level disaggregation data showing individual appliance consumption, grid exchange metrics, and monitor health information.
+  version: 1.0.0
+  contact:
+    name: Sense Support
+    url: https://help.sense.com
+servers:
+- url: https://api.sense.com/apiservice/api/v1
+  description: Sense REST API
+security:
+- BearerAuth: []
+tags:
+- name: Monitors
+  description: Monitor overview, status, and device detection
+paths:
+  /app/monitors/{monitor_id}/overview:
+    get:
+      operationId: getMonitorOverview
+      summary: Get monitor overview
+      description: Retrieve overview information for a Sense monitor, including the monitor object with solar configuration flags, firmware version, and associated account details.
+      tags:
+      - Monitors
+      parameters:
+      - $ref: '#/components/parameters/MonitorId'
+      responses:
+        '200':
+          description: Monitor overview data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorOverviewResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Monitor not found
+  /app/monitors/{monitor_id}/status:
+    get:
+      operationId: getMonitorStatus
+      summary: Get monitor and device detection status
+      description: Retrieve current status of the monitor including hardware health, network connectivity, and device detection progress. Also returns the current firmware version installed on the monitor.
+      tags:
+      - Monitors
+      parameters:
+      - $ref: '#/components/parameters/MonitorId'
+      responses:
+        '200':
+          description: Monitor status data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorStatusResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Monitor not found
+  /app/{monitor_id}/realtime_update:
+    get:
+      operationId: getRealtimeUpdate
+      summary: Get a single realtime update
+      description: Retrieve the current real-time power snapshot for a monitor without opening a WebSocket connection. Supported on monitors running firmware version 1.64 or later. Returns the same payload structure as the WebSocket realtime_update message.
+      tags:
+      - Monitors
+      parameters:
+      - name: monitor_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The monitor's unique ID
+        example: '12345'
+      responses:
+        '200':
+          description: Realtime update snapshot
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RealtimePayload'
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    MonitorOverviewResponse:
+      type: object
+      description: Full monitor overview including monitor details and account info
+      properties:
+        monitor_overview:
+          type: object
+          properties:
+            monitor:
+              $ref: '#/components/schemas/MonitorDetail'
+    RealtimePayload:
+      type: object
+      description: Real-time power snapshot from the monitor
+      properties:
+        w:
+          type: number
+          format: float
+          description: Current whole-home power consumption in watts
+          example: 1234.5
+        solar_w:
+          type: number
+          format: float
+          description: Current solar production in watts (0 if no solar)
+          example: 850.0
+        grid_w:
+          type: number
+          format: float
+          description: Net grid exchange in watts (positive=importing, negative=exporting)
+          example: 384.5
+        hz:
+          type: number
+          format: float
+          description: AC frequency in Hz
+          example: 60.01
+        voltage:
+          type: array
+          items:
+            type: number
+            format: float
+          description: Voltage readings per leg in volts
+          example:
+          - 121.2
+          - 120.8
+        devices:
+          type: array
+          description: Currently active detected devices
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Device ID
+              name:
+                type: string
+                description: Device name
+              icon:
+                type: string
+                description: Device icon
+              w:
+                type: number
+                format: float
+                description: Current device power in watts
+    MonitorDetail:
+      type: object
+      description: Detailed monitor information
+      properties:
+        id:
+          type: string
+          description: Unique monitor ID
+          example: '12345'
+        serial_number:
+          type: string
+          description: Physical device serial number
+        time_zone:
+          type: string
+          description: IANA time zone for this monitor
+          example: America/Chicago
+        solar_configured:
+          type: boolean
+          description: Whether solar production monitoring is active
+          example: false
+        version:
+          type: string
+          description: Currently installed firmware version
+          example: 1.65.3490-g0f9f5a3
+        signal_check_capable:
+          type: boolean
+          description: Whether the monitor supports signal quality checks
+    MonitorStatusResponse:
+      type: object
+      description: Monitor status including health and device detection progress
+      properties:
+        monitor_info:
+          type: object
+          properties:
+            version:
+              type: string
+              description: Firmware version string
+              example: 1.65.3490-g0f9f5a3
+            wifi_strength:
+              type: integer
+              description: WiFi signal strength in dBm
+              example: -55
+            ndevices_found:
+              type: integer
+              description: Number of devices detected so far
+              example: 12
+            detection_running:
+              type: boolean
+              description: Whether device detection is actively running
+              example: true
+  parameters:
+    MonitorId:
+      name: monitor_id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The Sense monitor's unique numeric ID
+      example: '12345'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Bearer token obtained from the /authenticate or /renew endpoints. Include as "Authorization: bearer <access_token>" header.'

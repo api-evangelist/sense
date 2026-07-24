@@ -1,0 +1,202 @@
+openapi: 3.0.3
+info:
+  title: Sense Client Authentication API
+  description: The Sense Client REST API provides access to historical trend data and account information for Sense home energy monitors. Authenticated users can retrieve aggregated energy consumption and solar production statistics across configurable time scales including day, week, month, year, and billing cycle. The API returns device-level disaggregation data showing individual appliance consumption, grid exchange metrics, and monitor health information.
+  version: 1.0.0
+  contact:
+    name: Sense Support
+    url: https://help.sense.com
+servers:
+- url: https://api.sense.com/apiservice/api/v1
+  description: Sense REST API
+security:
+- BearerAuth: []
+tags:
+- name: Authentication
+  description: Authenticate and manage sessions
+paths:
+  /authenticate:
+    post:
+      operationId: authenticate
+      summary: Authenticate with email and password
+      description: Authenticate with a Sense account using email and password. Returns an access token, user ID, refresh token, and a list of associated monitors. If MFA is enabled, a 401 with an mfa_token is returned requiring a follow-up call to /authenticate/mfa.
+      tags:
+      - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - email
+              - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: The user's Sense account email address
+                  example: user@example.com
+                password:
+                  type: string
+                  format: password
+                  description: The user's Sense account password
+      responses:
+        '200':
+          description: Successful authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          description: Authentication failed or MFA required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MFARequired'
+  /authenticate/mfa:
+    post:
+      operationId: validateMfa
+      summary: Validate MFA code
+      description: Validate a Time-based One-Time Password (TOTP) code after initial authentication returned a 401 with an mfa_token. On success returns full auth credentials identical to the /authenticate response.
+      tags:
+      - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - totp
+              - mfa_token
+              - client_time
+              properties:
+                totp:
+                  type: string
+                  description: The 6-digit TOTP code from the authenticator app
+                  example: '123456'
+                mfa_token:
+                  type: string
+                  description: The mfa_token returned from the initial authenticate call
+                client_time:
+                  type: string
+                  format: date-time
+                  description: Current UTC time in ISO 8601 format
+                  example: '2026-06-13T12:00:00Z'
+      responses:
+        '200':
+          description: MFA validated, authentication complete
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          description: Invalid MFA code
+  /renew:
+    post:
+      operationId: renewAuth
+      summary: Renew access token using refresh token
+      description: Exchange a refresh token for a new access token. Call this when the current access token is expired (401 response from any authenticated endpoint).
+      tags:
+      - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - user_id
+              - refresh_token
+              properties:
+                user_id:
+                  type: string
+                  description: The user's Sense user ID from the original auth response
+                  example: '123456'
+                refresh_token:
+                  type: string
+                  description: The refresh token from the original auth response
+      responses:
+        '200':
+          description: Token renewed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          description: Refresh token invalid or expired
+  /logout:
+    get:
+      operationId: logout
+      summary: Log out and invalidate the current session
+      description: Invalidates the current access token and ends the session.
+      tags:
+      - Authentication
+      responses:
+        '200':
+          description: Successfully logged out
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    MFARequired:
+      type: object
+      description: Response when MFA code is required to complete authentication
+      properties:
+        mfa_token:
+          type: string
+          description: Token to pass to the /authenticate/mfa endpoint
+        error_reason:
+          type: string
+          description: Human-readable explanation of why MFA is required
+          example: MFA required
+    MonitorSummary:
+      type: object
+      description: Summary of a Sense monitor returned in authentication responses
+      properties:
+        id:
+          type: string
+          description: Unique monitor ID
+          example: '12345'
+        serial_number:
+          type: string
+          description: Physical device serial number
+          example: SN1234567890
+        time_zone:
+          type: string
+          description: IANA time zone identifier for the monitor location
+          example: America/New_York
+        solar_configured:
+          type: boolean
+          description: Whether solar monitoring is configured for this monitor
+          example: false
+    AuthResponse:
+      type: object
+      description: Successful authentication response containing credentials and monitor list
+      properties:
+        access_token:
+          type: string
+          description: Bearer token for authenticating subsequent API calls
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        user_id:
+          type: string
+          description: Unique identifier for the authenticated user
+          example: '654321'
+        refresh_token:
+          type: string
+          description: Long-lived token for renewing the access token
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        monitors:
+          type: array
+          description: List of Sense monitors associated with the account
+          items:
+            $ref: '#/components/schemas/MonitorSummary'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Bearer token obtained from the /authenticate or /renew endpoints. Include as "Authorization: bearer <access_token>" header.'
