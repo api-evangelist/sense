@@ -16,7 +16,20 @@ description: >-
   meters deployed by utility partners, expanding its reach to tens of millions
   of homes without requiring standalone hardware purchases.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/sense.png
 url: https://raw.githubusercontent.com/api-evangelist/sense/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -32,80 +45,187 @@ tags:
   - Real-Time Data
   - ClimateTech
 apis:
-  - aid: sense:sense-client-api
-    name: Sense Client API
-    description: >-
-      The Sense Client REST API provides access to historical trend data and
-      account information for Sense home energy monitors. Authenticated users
-      can retrieve aggregated energy consumption and solar production statistics
-      across configurable time scales including day, week, month, year, and
-      billing cycle. The API returns device-level disaggregation data showing
-      individual appliance consumption, grid exchange metrics, and monitor
-      health information.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://sense.com
-    baseURL: https://api.sense.com/apiservice/api/v1
-    tags:
-      - Energy
-      - REST
-      - Trend Data
-      - Device Detection
-    properties:
-      - type: Website
-        url: https://sense.com
-      - type: Documentation
-        url: https://help.sense.com
-      - type: GitHubOrg
-        url: https://github.com/scottbonline/sense
-      - type: StatusPage
-        url: https://status.sense.com
-      - type: Blog
-        url: https://blog.sense.com
-      - type: LinkedIn
-        url: https://www.linkedin.com/company/senseenergy
-      - type: X
-        url: https://x.com/sense
-      - type: OpenAPI
-        url: openapi/sense-sense-client-api-openapi.yml
-      - type: Plans
-        url: plans/sense-plans-pricing.yml
-      - type: RateLimits
-        url: rate-limits/sense-rate-limits.yml
-      - type: FinOps
-        url: finops/sense-finops.yml
-  - aid: sense:sense-realtime-api
-    name: Sense Realtime API
-    description: >-
-      The Sense Realtime API delivers live electricity usage data via a
-      WebSocket connection, streaming second-by-second power consumption
-      readings for the whole home and identified devices. The feed includes
-      current wattage draw, solar production output when applicable, grid
-      import and export values, and the real-time on/off status of
-      machine-learning identified devices. Clients authenticate using a bearer
-      token obtained from the Client API and connect to the secure WebSocket
-      endpoint parameterized with the monitor ID.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://sense.com
-    baseURL: wss://clientrt.sense.com/monitors
-    tags:
-      - Energy
-      - WebSocket
-      - Real-Time
-      - Solar
-      - IoT
-    properties:
-      - type: Website
-        url: https://sense.com
-      - type: Documentation
-        url: https://help.sense.com
-      - type: StatusPage
-        url: https://status.sense.com
-      - type: Plans
-        url: plans/sense-plans-pricing.yml
-      - type: RateLimits
-        url: rate-limits/sense-rate-limits.yml
-      - type: FinOps
-        url: finops/sense-finops.yml
+- aid: sense:sense-realtime-api
+  name: Sense Realtime API
+  description: >-
+    The Sense Realtime API delivers live electricity usage data via a WebSocket connection, streaming
+    second-by-second power consumption readings for the whole home and identified devices. The feed includes
+    current wattage draw, solar production output when applicable, grid import and export values, and
+    the real-time on/off status of machine-learning identified devices. Clients authenticate using a bearer
+    token obtained from the Client API and connect to the secure WebSocket endpoint parameterized with
+    the monitor ID.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://sense.com
+  baseURL: wss://clientrt.sense.com/monitors
+  tags:
+  - Energy
+  - WebSocket
+  - Real-Time
+  - Solar
+  - IoT
+  properties:
+  - type: Website
+    url: https://sense.com
+  - type: Documentation
+    url: https://help.sense.com
+  - type: StatusPage
+    url: https://status.sense.com
+  - type: Plans
+    url: plans/sense-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/sense-rate-limits.yml
+  - type: FinOps
+    url: finops/sense-finops.yml
+- aid: sense:sense-authentication-api
+  name: Sense Authentication API
+  description: Authenticate and manage sessions
+  humanURL: https://sense.com
+  baseURL: https://api.sense.com/apiservice/api/v1
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/sense-authentication-api-openapi.yml
+  - type: Website
+    url: https://sense.com
+  - type: Documentation
+    url: https://help.sense.com
+  - type: GitHubOrg
+    url: https://github.com/scottbonline/sense
+  - type: StatusPage
+    url: https://status.sense.com
+  - type: Blog
+    url: https://blog.sense.com
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/senseenergy
+  - type: X
+    url: https://x.com/sense
+  - type: Plans
+    url: plans/sense-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/sense-rate-limits.yml
+  - type: FinOps
+    url: finops/sense-finops.yml
+- aid: sense:sense-devices-api
+  name: Sense Devices API
+  description: Device-level energy data and device information
+  humanURL: https://sense.com
+  baseURL: https://api.sense.com/apiservice/api/v1
+  tags:
+  - Devices
+  properties:
+  - type: OpenAPI
+    url: openapi/sense-devices-api-openapi.yml
+  - type: Website
+    url: https://sense.com
+  - type: Documentation
+    url: https://help.sense.com
+  - type: GitHubOrg
+    url: https://github.com/scottbonline/sense
+  - type: StatusPage
+    url: https://status.sense.com
+  - type: Blog
+    url: https://blog.sense.com
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/senseenergy
+  - type: X
+    url: https://x.com/sense
+  - type: Plans
+    url: plans/sense-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/sense-rate-limits.yml
+  - type: FinOps
+    url: finops/sense-finops.yml
+- aid: sense:sense-history-api
+  name: Sense History API
+  description: Historical energy usage and solar production data
+  humanURL: https://sense.com
+  baseURL: https://api.sense.com/apiservice/api/v1
+  tags:
+  - History
+  properties:
+  - type: OpenAPI
+    url: openapi/sense-history-api-openapi.yml
+  - type: Website
+    url: https://sense.com
+  - type: Documentation
+    url: https://help.sense.com
+  - type: GitHubOrg
+    url: https://github.com/scottbonline/sense
+  - type: StatusPage
+    url: https://status.sense.com
+  - type: Blog
+    url: https://blog.sense.com
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/senseenergy
+  - type: X
+    url: https://x.com/sense
+  - type: Plans
+    url: plans/sense-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/sense-rate-limits.yml
+  - type: FinOps
+    url: finops/sense-finops.yml
+- aid: sense:sense-monitors-api
+  name: Sense Monitors API
+  description: Monitor overview, status, and device detection
+  humanURL: https://sense.com
+  baseURL: https://api.sense.com/apiservice/api/v1
+  tags:
+  - Monitors
+  properties:
+  - type: OpenAPI
+    url: openapi/sense-monitors-api-openapi.yml
+  - type: Website
+    url: https://sense.com
+  - type: Documentation
+    url: https://help.sense.com
+  - type: GitHubOrg
+    url: https://github.com/scottbonline/sense
+  - type: StatusPage
+    url: https://status.sense.com
+  - type: Blog
+    url: https://blog.sense.com
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/senseenergy
+  - type: X
+    url: https://x.com/sense
+  - type: Plans
+    url: plans/sense-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/sense-rate-limits.yml
+  - type: FinOps
+    url: finops/sense-finops.yml
+- aid: sense:sense-users-api
+  name: Sense Users API
+  description: User-level timeline and usage data
+  humanURL: https://sense.com
+  baseURL: https://api.sense.com/apiservice/api/v1
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/sense-users-api-openapi.yml
+  - type: Website
+    url: https://sense.com
+  - type: Documentation
+    url: https://help.sense.com
+  - type: GitHubOrg
+    url: https://github.com/scottbonline/sense
+  - type: StatusPage
+    url: https://status.sense.com
+  - type: Blog
+    url: https://blog.sense.com
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/senseenergy
+  - type: X
+    url: https://x.com/sense
+  - type: Plans
+    url: plans/sense-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/sense-rate-limits.yml
+  - type: FinOps
+    url: finops/sense-finops.yml
 common:
   - type: AgenticAccess
     url: agentic-access/sense-agentic-access.yml
