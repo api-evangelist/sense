@@ -1,0 +1,22 @@
+{
+  "provider": "sense",
+  "sources": [
+    "sense-authentication-api-openapi.yml",
+    "sense-devices-api-openapi.yml",
+    "sense-history-api-openapi.yml",
+    "sense-monitors-api-openapi.yml",
+    "sense-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "sense-authentication-api-openapi.yml",
+    "sense-devices-api-openapi.yml",
+    "sense-history-api-openapi.yml",
+    "sense-monitors-api-openapi.yml",
+    "sense-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
