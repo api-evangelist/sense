@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sense Client Authentication API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authenticate with email and password",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sense.com/apiservice/api/v1/authenticate",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "email",
+                  "value": ""
+                },
+                {
+                  "name": "password",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Authenticate with a Sense account using email and password. Returns an access token, user ID, refresh token, and a list of associated monitors. If MFA is enabled, a 401 with an mfa_token is returned requiring a follow-up call to /authenticate/mfa."
+        },
+        {
+          "info": {
+            "name": "Validate MFA code",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sense.com/apiservice/api/v1/authenticate/mfa",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "totp",
+                  "value": ""
+                },
+                {
+                  "name": "mfa_token",
+                  "value": ""
+                },
+                {
+                  "name": "client_time",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Validate a Time-based One-Time Password (TOTP) code after initial authentication returned a 401 with an mfa_token. On success returns full auth credentials identical to the /authenticate response."
+        },
+        {
+          "info": {
+            "name": "Renew access token using refresh token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sense.com/apiservice/api/v1/renew",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "user_id",
+                  "value": ""
+                },
+                {
+                  "name": "refresh_token",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Exchange a refresh token for a new access token. Call this when the current access token is expired (401 response from any authenticated endpoint)."
+        },
+        {
+          "info": {
+            "name": "Log out and invalidate the current session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sense.com/apiservice/api/v1/logout"
+          },
+          "docs": "Invalidates the current access token and ends the session."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

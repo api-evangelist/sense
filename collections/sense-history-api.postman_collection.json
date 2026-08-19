@@ -1,0 +1,412 @@
+{
+  "item": [
+    {
+      "id": "5869941c-a8f5-4dc1-bd81-a31ee0745522",
+      "name": "History",
+      "description": {
+        "content": "Historical energy usage and solar production data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5e628eda-59ab-426f-9a71-430c5e9c6d4c",
+          "name": "Get historical energy usage",
+          "request": {
+            "name": "Get historical energy usage",
+            "description": {
+              "content": "Retrieve historical energy consumption data aggregated at the specified scale (DAY, WEEK, MONTH, YEAR, or CYCLE). Returns total usage in kWh with a device-level breakdown showing individual appliance consumption.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "app",
+                "monitors",
+                ":monitor_id",
+                "history",
+                "usage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "scale",
+                  "value": "<string>",
+                  "description": "(Required) The time scale for aggregation"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "(Required) Start date/time in ISO 8601 format (UTC)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "monitor_id",
+                  "description": "(Required) The Sense monitor's unique numeric ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d311779e-9903-494e-b243-7e69c515d631",
+              "name": "Historical usage data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    "monitors",
+                    ":monitor_id",
+                    "history",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "scale",
+                      "value": "DAY"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2026-06-13T00:00:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"start\": \"2026-06-13T00:00:00Z\",\n  \"consumption\": {\n    \"usage_total_kwh\": 18.42\n  },\n  \"device_breakdown\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"icon\": \"string\",\n      \"consumption\": {\n        \"usage_total_kwh\": 1075.1309819951305\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"icon\": \"string\",\n      \"consumption\": {\n        \"usage_total_kwh\": 3129.5002831178153\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cc6ede9-425e-4bb3-9a6b-b338104b4df5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    "monitors",
+                    ":monitor_id",
+                    "history",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "scale",
+                      "value": "DAY"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2026-06-13T00:00:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3620d6a8-0062-41a1-ace1-b93ba003d8bd",
+          "name": "Get historical solar production data",
+          "request": {
+            "name": "Get historical solar production data",
+            "description": {
+              "content": "Retrieve historical solar production data for monitors with solar configured. Returns production totals, grid exchange (from_grid_kwh, to_grid_kwh), net production, and solar percentage of consumption for the requested scale and start date.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "app",
+                "monitors",
+                ":monitor_id",
+                "history",
+                "usage",
+                "solar"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "scale",
+                  "value": "<string>",
+                  "description": "(Required) The time scale for aggregation"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "(Required) Start date/time in ISO 8601 format (UTC)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "monitor_id",
+                  "description": "(Required) The Sense monitor's unique numeric ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "faf8bfb2-5e91-4126-aba5-f1773f6d8359",
+              "name": "Historical solar data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    "monitors",
+                    ":monitor_id",
+                    "history",
+                    "usage",
+                    "solar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "scale",
+                      "value": "DAY"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2026-06-13T00:00:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": {\n    \"production_kwh\": 12.75,\n    \"from_grid_kwh\": 5.67,\n    \"to_grid_kwh\": 2.31,\n    \"net_kwh\": 7.08,\n    \"solar_percentage\": 68.5\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18724d4c-8489-4ee1-97a6-c5d45c6d2cb9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    "monitors",
+                    ":monitor_id",
+                    "history",
+                    "usage",
+                    "solar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "scale",
+                      "value": "DAY"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2026-06-13T00:00:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sense.com/apiservice/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8e559d53-adf7-41cf-9280-57416ddecd65",
+    "name": "Sense Client Authentication History API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Sense Client REST API provides access to historical trend data and account information for Sense home energy monitors. Authenticated users can retrieve aggregated energy consumption and solar production statistics across configurable time scales including day, week, month, year, and billing cycle. The API returns device-level disaggregation data showing individual appliance consumption, grid exchange metrics, and monitor health information.\n\nContact Support:\n Name: Sense Support",
+      "type": "text/plain"
+    }
+  }
+}

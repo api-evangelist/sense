@@ -1,0 +1,638 @@
+{
+  "item": [
+    {
+      "id": "91fb56b1-ad80-4547-98dd-e4b5345bfdfb",
+      "name": "Monitors",
+      "description": {
+        "content": "Monitor overview, status, and device detection",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "94964cbf-b059-4d1b-bb92-c6b679aefac0",
+          "name": "Get monitor overview",
+          "request": {
+            "name": "Get monitor overview",
+            "description": {
+              "content": "Retrieve overview information for a Sense monitor, including the monitor object with solar configuration flags, firmware version, and associated account details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "app",
+                "monitors",
+                ":monitor_id",
+                "overview"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "monitor_id",
+                  "description": "(Required) The Sense monitor's unique numeric ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "35c6a850-c743-412e-8dfb-d0085bbe3b11",
+              "name": "Monitor overview data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    "monitors",
+                    ":monitor_id",
+                    "overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"monitor_overview\": {\n    \"monitor\": {\n      \"id\": \"12345\",\n      \"serial_number\": \"string\",\n      \"time_zone\": \"America/Chicago\",\n      \"solar_configured\": false,\n      \"version\": \"1.65.3490-g0f9f5a3\",\n      \"signal_check_capable\": true\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef387ed5-f773-435a-b114-3744bb0d6fd5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    "monitors",
+                    ":monitor_id",
+                    "overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "004fde1c-0429-438e-88cc-9f93980a3352",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    "monitors",
+                    ":monitor_id",
+                    "overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "302320e5-42c9-403e-91a9-c3709de72a32",
+              "name": "Monitor not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    "monitors",
+                    ":monitor_id",
+                    "overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "58af7c35-ffe7-43ea-af1d-67e83d053071",
+          "name": "Get monitor and device detection status",
+          "request": {
+            "name": "Get monitor and device detection status",
+            "description": {
+              "content": "Retrieve current status of the monitor including hardware health, network connectivity, and device detection progress. Also returns the current firmware version installed on the monitor.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "app",
+                "monitors",
+                ":monitor_id",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "monitor_id",
+                  "description": "(Required) The Sense monitor's unique numeric ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1214bc88-74b4-4169-83ea-5dc843711624",
+              "name": "Monitor status data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    "monitors",
+                    ":monitor_id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"monitor_info\": {\n    \"version\": \"1.65.3490-g0f9f5a3\",\n    \"wifi_strength\": -55,\n    \"ndevices_found\": 12,\n    \"detection_running\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fd9bae9-f02e-4eb0-8a90-865a0bb4ed04",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    "monitors",
+                    ":monitor_id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "183cc13b-37fa-4f1d-8921-8f58c8cb1260",
+              "name": "Monitor not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    "monitors",
+                    ":monitor_id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "015194ee-9dc3-4a2c-80f1-c9fa910ac78c",
+          "name": "Get a single realtime update",
+          "request": {
+            "name": "Get a single realtime update",
+            "description": {
+              "content": "Retrieve the current real-time power snapshot for a monitor without opening a WebSocket connection. Supported on monitors running firmware version 1.64 or later. Returns the same payload structure as the WebSocket realtime_update message.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "app",
+                ":monitor_id",
+                "realtime_update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "monitor_id",
+                  "description": "(Required) The monitor's unique ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "796ce665-a879-4b81-8e76-b382d9b2a18d",
+              "name": "Realtime update snapshot",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    ":monitor_id",
+                    "realtime_update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The monitor's unique ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"w\": 1234.5,\n  \"solar_w\": 850,\n  \"grid_w\": 384.5,\n  \"hz\": 60.01,\n  \"voltage\": [\n    121.2,\n    120.8\n  ],\n  \"devices\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"icon\": \"string\",\n      \"w\": 5657.931776767124\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"icon\": \"string\",\n      \"w\": 3585.5093075489362\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "264409b8-77d3-472a-8f59-646be61ca367",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    ":monitor_id",
+                    "realtime_update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The monitor's unique ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sense.com/apiservice/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2638f2a2-44c1-4a4d-a2e7-16509ae42d6e",
+    "name": "Sense Client Authentication Monitors API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Sense Client REST API provides access to historical trend data and account information for Sense home energy monitors. Authenticated users can retrieve aggregated energy consumption and solar production statistics across configurable time scales including day, week, month, year, and billing cycle. The API returns device-level disaggregation data showing individual appliance consumption, grid exchange metrics, and monitor health information.\n\nContact Support:\n Name: Sense Support",
+      "type": "text/plain"
+    }
+  }
+}

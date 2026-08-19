@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sense Client Authentication History API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "History",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get historical energy usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sense.com/apiservice/api/v1/app/monitors/:monitor_id/history/usage",
+            "params": [
+              {
+                "name": "monitor_id",
+                "value": "12345",
+                "type": "path",
+                "description": "The Sense monitor's unique numeric ID"
+              },
+              {
+                "name": "scale",
+                "value": "DAY",
+                "type": "query",
+                "description": "The time scale for aggregation"
+              },
+              {
+                "name": "start",
+                "value": "2026-06-13T00:00:00",
+                "type": "query",
+                "description": "Start date/time in ISO 8601 format (UTC)"
+              }
+            ]
+          },
+          "docs": "Retrieve historical energy consumption data aggregated at the specified scale (DAY, WEEK, MONTH, YEAR, or CYCLE). Returns total usage in kWh with a device-level breakdown showing individual appliance consumption."
+        },
+        {
+          "info": {
+            "name": "Get historical solar production data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sense.com/apiservice/api/v1/app/monitors/:monitor_id/history/usage/solar",
+            "params": [
+              {
+                "name": "monitor_id",
+                "value": "12345",
+                "type": "path",
+                "description": "The Sense monitor's unique numeric ID"
+              },
+              {
+                "name": "scale",
+                "value": "DAY",
+                "type": "query",
+                "description": "The time scale for aggregation"
+              },
+              {
+                "name": "start",
+                "value": "2026-06-13T00:00:00",
+                "type": "query",
+                "description": "Start date/time in ISO 8601 format (UTC)"
+              }
+            ]
+          },
+          "docs": "Retrieve historical solar production data for monitors with solar configured. Returns production totals, grid exchange (from_grid_kwh, to_grid_kwh), net production, and solar percentage of consumption for the requested scale and start date."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,876 @@
+{
+  "item": [
+    {
+      "id": "6c50ce22-30d2-4813-a9e5-8725c76946f6",
+      "name": "Devices",
+      "description": {
+        "content": "Device-level energy data and device information",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6ef597c1-47c4-46e1-b82d-3100420af6c6",
+          "name": "List discovered devices",
+          "request": {
+            "name": "List discovered devices",
+            "description": {
+              "content": "Retrieve the list of devices that Sense has identified through machine-learning disaggregation. Each device entry includes the device ID, name, icon identifier, and current on/off status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "app",
+                "monitors",
+                ":monitor_id",
+                "devices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "monitor_id",
+                  "description": "(Required) The Sense monitor's unique numeric ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "06c1de2b-7a12-4269-8e93-7052abf48cbb",
+              "name": "List of discovered devices",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    "monitors",
+                    ":monitor_id",
+                    "devices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"abc123def456\",\n    \"name\": \"Refrigerator\",\n    \"icon\": \"fridge\",\n    \"is_on\": true,\n    \"power_w\": 150.5,\n    \"tags\": {\n      \"key_0\": \"string\"\n    }\n  },\n  {\n    \"id\": \"abc123def456\",\n    \"name\": \"Refrigerator\",\n    \"icon\": \"fridge\",\n    \"is_on\": true,\n    \"power_w\": 150.5,\n    \"tags\": {\n      \"key_0\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b234b085-ad6d-4df3-9bb5-81f7f2f74436",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    "monitors",
+                    ":monitor_id",
+                    "devices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "87811160-3cb3-4c43-ab6b-2c81ca8ecca7",
+          "name": "Get devices overview",
+          "request": {
+            "name": "Get devices overview",
+            "description": {
+              "content": "Retrieve an overview of all detected devices including their current power consumption and identification status. Used by the async client to fetch device lists.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "app",
+                "monitors",
+                ":monitor_id",
+                "devices",
+                "overview"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "monitor_id",
+                  "description": "(Required) The Sense monitor's unique numeric ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1eee0bfb-ffc3-45fa-ae8c-96ddeff5eb3a",
+              "name": "Device overview data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    "monitors",
+                    ":monitor_id",
+                    "devices",
+                    "overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"devices\": [\n    {\n      \"id\": \"abc123def456\",\n      \"name\": \"Refrigerator\",\n      \"icon\": \"fridge\",\n      \"is_on\": true,\n      \"power_w\": 150.5,\n      \"tags\": {\n        \"key_0\": 8726\n      }\n    },\n    {\n      \"id\": \"abc123def456\",\n      \"name\": \"Refrigerator\",\n      \"icon\": \"fridge\",\n      \"is_on\": true,\n      \"power_w\": 150.5,\n      \"tags\": {\n        \"key_0\": \"string\",\n        \"key_1\": 656.5898938030534\n      }\n    }\n  ],\n  \"total_count\": 2700\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f149e494-2e3d-447a-9e0e-11e136f5a116",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    "monitors",
+                    ":monitor_id",
+                    "devices",
+                    "overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f4206bd-ddc6-4868-a184-ef5fe8c88e1c",
+          "name": "Get always-on device info",
+          "request": {
+            "name": "Get always-on device info",
+            "description": {
+              "content": "Retrieve information about always-on power consumption — devices and loads that draw power continuously. This mirrors the always-on section in the Sense web application.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "app",
+                "monitors",
+                ":monitor_id",
+                "devices",
+                "always_on"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "monitor_id",
+                  "description": "(Required) The Sense monitor's unique numeric ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d5045919-fd88-4df4-bdc9-4b312ee6101a",
+              "name": "Always-on device information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    "monitors",
+                    ":monitor_id",
+                    "devices",
+                    "always_on"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"always_on\": 312.4,\n  \"components\": [\n    {\n      \"name\": \"string\",\n      \"watts\": 9501.635062286032\n    },\n    {\n      \"name\": \"string\",\n      \"watts\": 3633.2496521589064\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3b5bc1c-f2d7-4c80-bd4b-6058c14ee0dd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    "monitors",
+                    ":monitor_id",
+                    "devices",
+                    "always_on"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1266f62a-85fd-4e8a-89d4-f43740ab56be",
+          "name": "Get specific device information",
+          "request": {
+            "name": "Get specific device information",
+            "description": {
+              "content": "Retrieve detailed information about a specific detected device, including its name, icon, current power, and energy history.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "app",
+                "monitors",
+                ":monitor_id",
+                "devices",
+                ":device_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "monitor_id",
+                  "description": "(Required) The Sense monitor's unique numeric ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "device_id",
+                  "description": "(Required) The device ID returned from the devices list"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1e121836-1b99-4a33-9f43-0caf89367608",
+              "name": "Device detail data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    "monitors",
+                    ":monitor_id",
+                    "devices",
+                    ":device_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "device_id",
+                      "description": "(Required) The device ID returned from the devices list"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123def456\",\n  \"name\": \"Refrigerator\",\n  \"icon\": \"fridge\",\n  \"is_on\": true,\n  \"power_w\": 150.5,\n  \"tags\": {\n    \"key_0\": 8574.307572230799\n  },\n  \"energy_kwh\": {\n    \"DAY\": 2284.3661974396023,\n    \"WEEK\": 3936.3431883130684,\n    \"MONTH\": 9197.30741280726,\n    \"YEAR\": 3835.851130264416\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59701373-bef0-41d1-91e1-45d29457505b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    "monitors",
+                    ":monitor_id",
+                    "devices",
+                    ":device_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "device_id",
+                      "description": "(Required) The device ID returned from the devices list"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3e615dd0-78c6-410b-853d-caaa37ad0242",
+              "name": "Device not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app",
+                    "monitors",
+                    ":monitor_id",
+                    "devices",
+                    ":device_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "device_id",
+                      "description": "(Required) The device ID returned from the devices list"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6c17d73e-9b80-4d4c-9046-9cd73c6fcc50",
+          "name": "Get raw device data",
+          "request": {
+            "name": "Get raw device data",
+            "description": {
+              "content": "Retrieve raw device data from the legacy (non-app) endpoint. Returns the complete device list with all properties.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "monitors",
+                ":monitor_id",
+                "devices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "monitor_id",
+                  "description": "(Required) The Sense monitor's unique numeric ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3b36a73d-0009-4491-aad6-9197cc4d2aea",
+              "name": "Raw device list data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "monitors",
+                    ":monitor_id",
+                    "devices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"abc123def456\",\n    \"name\": \"Refrigerator\",\n    \"icon\": \"fridge\",\n    \"is_on\": true,\n    \"power_w\": 150.5,\n    \"tags\": {\n      \"key_0\": \"string\"\n    }\n  },\n  {\n    \"id\": \"abc123def456\",\n    \"name\": \"Refrigerator\",\n    \"icon\": \"fridge\",\n    \"is_on\": true,\n    \"power_w\": 150.5,\n    \"tags\": {\n      \"key_0\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67a50938-c928-4238-8ced-a7b440e6830e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "monitors",
+                    ":monitor_id",
+                    "devices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor_id",
+                      "description": "(Required) The Sense monitor's unique numeric ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sense.com/apiservice/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dd180b9f-efe3-4300-b7c4-8b0f15ae7602",
+    "name": "Sense Client Authentication Devices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Sense Client REST API provides access to historical trend data and account information for Sense home energy monitors. Authenticated users can retrieve aggregated energy consumption and solar production statistics across configurable time scales including day, week, month, year, and billing cycle. The API returns device-level disaggregation data showing individual appliance consumption, grid exchange metrics, and monitor health information.\n\nContact Support:\n Name: Sense Support",
+      "type": "text/plain"
+    }
+  }
+}

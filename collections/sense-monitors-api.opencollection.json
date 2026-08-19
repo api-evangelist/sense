@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sense Client Authentication Monitors API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Monitors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get monitor overview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sense.com/apiservice/api/v1/app/monitors/:monitor_id/overview",
+            "params": [
+              {
+                "name": "monitor_id",
+                "value": "12345",
+                "type": "path",
+                "description": "The Sense monitor's unique numeric ID"
+              }
+            ]
+          },
+          "docs": "Retrieve overview information for a Sense monitor, including the monitor object with solar configuration flags, firmware version, and associated account details."
+        },
+        {
+          "info": {
+            "name": "Get monitor and device detection status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sense.com/apiservice/api/v1/app/monitors/:monitor_id/status",
+            "params": [
+              {
+                "name": "monitor_id",
+                "value": "12345",
+                "type": "path",
+                "description": "The Sense monitor's unique numeric ID"
+              }
+            ]
+          },
+          "docs": "Retrieve current status of the monitor including hardware health, network connectivity, and device detection progress. Also returns the current firmware version installed on the monitor."
+        },
+        {
+          "info": {
+            "name": "Get a single realtime update",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sense.com/apiservice/api/v1/app/:monitor_id/realtime_update",
+            "params": [
+              {
+                "name": "monitor_id",
+                "value": "12345",
+                "type": "path",
+                "description": "The monitor's unique ID"
+              }
+            ]
+          },
+          "docs": "Retrieve the current real-time power snapshot for a monitor without opening a WebSocket connection. Supported on monitors running firmware version 1.64 or later. Returns the same payload structure as the WebSocket realtime_update message."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

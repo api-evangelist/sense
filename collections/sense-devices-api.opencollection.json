@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sense Client Authentication Devices API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Devices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List discovered devices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sense.com/apiservice/api/v1/app/monitors/:monitor_id/devices",
+            "params": [
+              {
+                "name": "monitor_id",
+                "value": "12345",
+                "type": "path",
+                "description": "The Sense monitor's unique numeric ID"
+              }
+            ]
+          },
+          "docs": "Retrieve the list of devices that Sense has identified through machine-learning disaggregation. Each device entry includes the device ID, name, icon identifier, and current on/off status."
+        },
+        {
+          "info": {
+            "name": "Get devices overview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sense.com/apiservice/api/v1/app/monitors/:monitor_id/devices/overview",
+            "params": [
+              {
+                "name": "monitor_id",
+                "value": "12345",
+                "type": "path",
+                "description": "The Sense monitor's unique numeric ID"
+              }
+            ]
+          },
+          "docs": "Retrieve an overview of all detected devices including their current power consumption and identification status. Used by the async client to fetch device lists."
+        },
+        {
+          "info": {
+            "name": "Get always-on device info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sense.com/apiservice/api/v1/app/monitors/:monitor_id/devices/always_on",
+            "params": [
+              {
+                "name": "monitor_id",
+                "value": "12345",
+                "type": "path",
+                "description": "The Sense monitor's unique numeric ID"
+              }
+            ]
+          },
+          "docs": "Retrieve information about always-on power consumption — devices and loads that draw power continuously. This mirrors the always-on section in the Sense web application."
+        },
+        {
+          "info": {
+            "name": "Get specific device information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sense.com/apiservice/api/v1/app/monitors/:monitor_id/devices/:device_id",
+            "params": [
+              {
+                "name": "monitor_id",
+                "value": "12345",
+                "type": "path",
+                "description": "The Sense monitor's unique numeric ID"
+              },
+              {
+                "name": "device_id",
+                "value": "abc123def456",
+                "type": "path",
+                "description": "The device ID returned from the devices list"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific detected device, including its name, icon, current power, and energy history."
+        },
+        {
+          "info": {
+            "name": "Get raw device data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sense.com/apiservice/api/v1/monitors/:monitor_id/devices",
+            "params": [
+              {
+                "name": "monitor_id",
+                "value": "12345",
+                "type": "path",
+                "description": "The Sense monitor's unique numeric ID"
+              }
+            ]
+          },
+          "docs": "Retrieve raw device data from the legacy (non-app) endpoint. Returns the complete device list with all properties."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
