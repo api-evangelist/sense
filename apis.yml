@@ -43,6 +43,16 @@ tags:
   - Solar
   - Device Detection
   - Real-Time Data
+  - Climate Tech
+tags_raw:
+  - Energy
+  - Home Energy Monitoring
+  - IoT
+  - Smart Home
+  - Electricity
+  - Solar
+  - Device Detection
+  - Real-Time Data
   - ClimateTech
 apis:
 - aid: sense:sense-realtime-api
@@ -202,6 +212,8 @@ apis:
   humanURL: https://sense.com
   baseURL: https://api.sense.com/apiservice/api/v1
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
