@@ -6,8 +6,7 @@
       "feed_url": "https://sense.com/wp-json/wp/v2/consumer-blog",
       "title": "",
       "saved": 0,
-      "method": "none",
-      "error": "parse_failed"
+      "method": "none"
     },
     {
       "source": "https://status.sense.com/history.atom",
@@ -28,6 +27,6 @@
       "error": "HTTPError"
     }
   ],
-  "post_count": 24,
-  "fetched": "2026-08-15T12:11:08Z"
+  "post_count": 25,
+  "fetched": "2026-08-22T20:20:02Z"
 }
