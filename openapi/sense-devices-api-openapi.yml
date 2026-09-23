@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Sense Client Authentication Devices API
+  title: Sense Client Devices API
   description: The Sense Client REST API provides access to historical trend data and account information for Sense home energy monitors. Authenticated users can retrieve aggregated energy consumption and solar production statistics across configurable time scales including day, week, month, year, and billing cycle. The API returns device-level disaggregation data showing individual appliance consumption, grid exchange metrics, and monitor health information.
   version: 1.0.0
   contact:
@@ -120,6 +120,37 @@ paths:
           description: Unauthorized
 components:
   schemas:
+    AlwaysOnResponse:
+      type: object
+      description: Always-on load information
+      properties:
+        always_on:
+          type: number
+          format: float
+          description: Total always-on wattage
+          example: 312.4
+        components:
+          type: array
+          description: Individual always-on components
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              watts:
+                type: number
+                format: float
+    DevicesOverviewResponse:
+      type: object
+      description: Overview of all detected devices
+      properties:
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Device'
+        total_count:
+          type: integer
+          description: Total number of detected devices
     DeviceDetail:
       type: object
       description: Detailed information for a specific device
@@ -176,37 +207,6 @@ components:
           type: object
           additionalProperties: true
           description: Additional metadata tags for the device
-    DevicesOverviewResponse:
-      type: object
-      description: Overview of all detected devices
-      properties:
-        devices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Device'
-        total_count:
-          type: integer
-          description: Total number of detected devices
-    AlwaysOnResponse:
-      type: object
-      description: Always-on load information
-      properties:
-        always_on:
-          type: number
-          format: float
-          description: Total always-on wattage
-          example: 312.4
-        components:
-          type: array
-          description: Individual always-on components
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              watts:
-                type: number
-                format: float
   parameters:
     MonitorId:
       name: monitor_id

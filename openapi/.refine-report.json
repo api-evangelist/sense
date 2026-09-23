@@ -1,11 +1,7 @@
 {
   "provider": "sense",
   "sources": [
-    "sense-authentication-api-openapi.yml",
-    "sense-devices-api-openapi.yml",
-    "sense-history-api-openapi.yml",
-    "sense-monitors-api-openapi.yml",
-    "sense-users-api-openapi.yml"
+    "_original/sense-sense-client-api-openapi.yml"
   ],
   "outputs": [
     "sense-authentication-api-openapi.yml",
@@ -17,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sense-sense-client-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "sense-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sense-devices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sense-history-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sense-monitors-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sense-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
