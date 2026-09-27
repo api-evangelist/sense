@@ -154,26 +154,6 @@ components:
           type: string
           description: Human-readable explanation of why MFA is required
           example: MFA required
-    MonitorSummary:
-      type: object
-      description: Summary of a Sense monitor returned in authentication responses
-      properties:
-        id:
-          type: string
-          description: Unique monitor ID
-          example: '12345'
-        serial_number:
-          type: string
-          description: Physical device serial number
-          example: SN1234567890
-        time_zone:
-          type: string
-          description: IANA time zone identifier for the monitor location
-          example: America/New_York
-        solar_configured:
-          type: boolean
-          description: Whether solar monitoring is configured for this monitor
-          example: false
     AuthResponse:
       type: object
       description: Successful authentication response containing credentials and monitor list
@@ -195,6 +175,26 @@ components:
           description: List of Sense monitors associated with the account
           items:
             $ref: '#/components/schemas/MonitorSummary'
+    MonitorSummary:
+      type: object
+      description: Summary of a Sense monitor returned in authentication responses
+      properties:
+        id:
+          type: string
+          description: Unique monitor ID
+          example: '12345'
+        serial_number:
+          type: string
+          description: Physical device serial number
+          example: SN1234567890
+        time_zone:
+          type: string
+          description: IANA time zone identifier for the monitor location
+          example: America/New_York
+        solar_configured:
+          type: boolean
+          description: Whether solar monitoring is configured for this monitor
+          example: false
   securitySchemes:
     BearerAuth:
       type: http
