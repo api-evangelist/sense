@@ -143,17 +143,6 @@ paths:
           description: Unauthorized
 components:
   schemas:
-    MFARequired:
-      type: object
-      description: Response when MFA code is required to complete authentication
-      properties:
-        mfa_token:
-          type: string
-          description: Token to pass to the /authenticate/mfa endpoint
-        error_reason:
-          type: string
-          description: Human-readable explanation of why MFA is required
-          example: MFA required
     AuthResponse:
       type: object
       description: Successful authentication response containing credentials and monitor list
@@ -195,6 +184,17 @@ components:
           type: boolean
           description: Whether solar monitoring is configured for this monitor
           example: false
+    MFARequired:
+      type: object
+      description: Response when MFA code is required to complete authentication
+      properties:
+        mfa_token:
+          type: string
+          description: Token to pass to the /authenticate/mfa endpoint
+        error_reason:
+          type: string
+          description: Human-readable explanation of why MFA is required
+          example: MFA required
   securitySchemes:
     BearerAuth:
       type: http

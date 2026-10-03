@@ -94,15 +94,6 @@ paths:
         '401':
           description: Unauthorized
 components:
-  parameters:
-    MonitorId:
-      name: monitor_id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The Sense monitor's unique numeric ID
-      example: '12345'
   schemas:
     SolarHistoryResponse:
       type: object
@@ -175,6 +166,15 @@ components:
                     type: number
                     format: float
                     description: Device's total energy consumption in kWh
+  parameters:
+    MonitorId:
+      name: monitor_id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The Sense monitor's unique numeric ID
+      example: '12345'
   securitySchemes:
     BearerAuth:
       type: http

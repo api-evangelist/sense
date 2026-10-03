@@ -83,6 +83,38 @@ paths:
           description: Unauthorized
 components:
   schemas:
+    MonitorStatusResponse:
+      type: object
+      description: Monitor status including health and device detection progress
+      properties:
+        monitor_info:
+          type: object
+          properties:
+            version:
+              type: string
+              description: Firmware version string
+              example: 1.65.3490-g0f9f5a3
+            wifi_strength:
+              type: integer
+              description: WiFi signal strength in dBm
+              example: -55
+            ndevices_found:
+              type: integer
+              description: Number of devices detected so far
+              example: 12
+            detection_running:
+              type: boolean
+              description: Whether device detection is actively running
+              example: true
+    MonitorOverviewResponse:
+      type: object
+      description: Full monitor overview including monitor details and account info
+      properties:
+        monitor_overview:
+          type: object
+          properties:
+            monitor:
+              $ref: '#/components/schemas/MonitorDetail'
     MonitorDetail:
       type: object
       description: Detailed monitor information
@@ -109,38 +141,6 @@ components:
         signal_check_capable:
           type: boolean
           description: Whether the monitor supports signal quality checks
-    MonitorOverviewResponse:
-      type: object
-      description: Full monitor overview including monitor details and account info
-      properties:
-        monitor_overview:
-          type: object
-          properties:
-            monitor:
-              $ref: '#/components/schemas/MonitorDetail'
-    MonitorStatusResponse:
-      type: object
-      description: Monitor status including health and device detection progress
-      properties:
-        monitor_info:
-          type: object
-          properties:
-            version:
-              type: string
-              description: Firmware version string
-              example: 1.65.3490-g0f9f5a3
-            wifi_strength:
-              type: integer
-              description: WiFi signal strength in dBm
-              example: -55
-            ndevices_found:
-              type: integer
-              description: Number of devices detected so far
-              example: 12
-            detection_running:
-              type: boolean
-              description: Whether device detection is actively running
-              example: true
     RealtimePayload:
       type: object
       description: Real-time power snapshot from the monitor

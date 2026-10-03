@@ -120,6 +120,64 @@ paths:
           description: Unauthorized
 components:
   schemas:
+    DevicesOverviewResponse:
+      type: object
+      description: Overview of all detected devices
+      properties:
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Device'
+        total_count:
+          type: integer
+          description: Total number of detected devices
+    DeviceDetail:
+      type: object
+      description: Detailed information for a specific device
+      allOf:
+      - $ref: '#/components/schemas/Device'
+      - type: object
+        properties:
+          energy_kwh:
+            type: object
+            description: Energy consumption by time scale
+            properties:
+              DAY:
+                type: number
+                format: float
+                description: Daily energy in kWh
+              WEEK:
+                type: number
+                format: float
+                description: Weekly energy in kWh
+              MONTH:
+                type: number
+                format: float
+                description: Monthly energy in kWh
+              YEAR:
+                type: number
+                format: float
+                description: Annual energy in kWh
+    AlwaysOnResponse:
+      type: object
+      description: Always-on load information
+      properties:
+        always_on:
+          type: number
+          format: float
+          description: Total always-on wattage
+          example: 312.4
+        components:
+          type: array
+          description: Individual always-on components
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              watts:
+                type: number
+                format: float
     Device:
       type: object
       description: A machine-learning detected electrical device
@@ -149,64 +207,6 @@ components:
           type: object
           additionalProperties: true
           description: Additional metadata tags for the device
-    AlwaysOnResponse:
-      type: object
-      description: Always-on load information
-      properties:
-        always_on:
-          type: number
-          format: float
-          description: Total always-on wattage
-          example: 312.4
-        components:
-          type: array
-          description: Individual always-on components
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              watts:
-                type: number
-                format: float
-    DeviceDetail:
-      type: object
-      description: Detailed information for a specific device
-      allOf:
-      - $ref: '#/components/schemas/Device'
-      - type: object
-        properties:
-          energy_kwh:
-            type: object
-            description: Energy consumption by time scale
-            properties:
-              DAY:
-                type: number
-                format: float
-                description: Daily energy in kWh
-              WEEK:
-                type: number
-                format: float
-                description: Weekly energy in kWh
-              MONTH:
-                type: number
-                format: float
-                description: Monthly energy in kWh
-              YEAR:
-                type: number
-                format: float
-                description: Annual energy in kWh
-    DevicesOverviewResponse:
-      type: object
-      description: Overview of all detected devices
-      properties:
-        devices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Device'
-        total_count:
-          type: integer
-          description: Total number of detected devices
   parameters:
     MonitorId:
       name: monitor_id
