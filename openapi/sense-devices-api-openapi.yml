@@ -120,44 +120,6 @@ paths:
           description: Unauthorized
 components:
   schemas:
-    DevicesOverviewResponse:
-      type: object
-      description: Overview of all detected devices
-      properties:
-        devices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Device'
-        total_count:
-          type: integer
-          description: Total number of detected devices
-    DeviceDetail:
-      type: object
-      description: Detailed information for a specific device
-      allOf:
-      - $ref: '#/components/schemas/Device'
-      - type: object
-        properties:
-          energy_kwh:
-            type: object
-            description: Energy consumption by time scale
-            properties:
-              DAY:
-                type: number
-                format: float
-                description: Daily energy in kWh
-              WEEK:
-                type: number
-                format: float
-                description: Weekly energy in kWh
-              MONTH:
-                type: number
-                format: float
-                description: Monthly energy in kWh
-              YEAR:
-                type: number
-                format: float
-                description: Annual energy in kWh
     AlwaysOnResponse:
       type: object
       description: Always-on load information
@@ -207,6 +169,44 @@ components:
           type: object
           additionalProperties: true
           description: Additional metadata tags for the device
+    DevicesOverviewResponse:
+      type: object
+      description: Overview of all detected devices
+      properties:
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Device'
+        total_count:
+          type: integer
+          description: Total number of detected devices
+    DeviceDetail:
+      type: object
+      description: Detailed information for a specific device
+      allOf:
+      - $ref: '#/components/schemas/Device'
+      - type: object
+        properties:
+          energy_kwh:
+            type: object
+            description: Energy consumption by time scale
+            properties:
+              DAY:
+                type: number
+                format: float
+                description: Daily energy in kWh
+              WEEK:
+                type: number
+                format: float
+                description: Weekly energy in kWh
+              MONTH:
+                type: number
+                format: float
+                description: Monthly energy in kWh
+              YEAR:
+                type: number
+                format: float
+                description: Annual energy in kWh
   parameters:
     MonitorId:
       name: monitor_id

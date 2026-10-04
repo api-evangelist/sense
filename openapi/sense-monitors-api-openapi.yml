@@ -82,65 +82,16 @@ paths:
         '401':
           description: Unauthorized
 components:
+  parameters:
+    MonitorId:
+      name: monitor_id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The Sense monitor's unique numeric ID
+      example: '12345'
   schemas:
-    MonitorStatusResponse:
-      type: object
-      description: Monitor status including health and device detection progress
-      properties:
-        monitor_info:
-          type: object
-          properties:
-            version:
-              type: string
-              description: Firmware version string
-              example: 1.65.3490-g0f9f5a3
-            wifi_strength:
-              type: integer
-              description: WiFi signal strength in dBm
-              example: -55
-            ndevices_found:
-              type: integer
-              description: Number of devices detected so far
-              example: 12
-            detection_running:
-              type: boolean
-              description: Whether device detection is actively running
-              example: true
-    MonitorOverviewResponse:
-      type: object
-      description: Full monitor overview including monitor details and account info
-      properties:
-        monitor_overview:
-          type: object
-          properties:
-            monitor:
-              $ref: '#/components/schemas/MonitorDetail'
-    MonitorDetail:
-      type: object
-      description: Detailed monitor information
-      properties:
-        id:
-          type: string
-          description: Unique monitor ID
-          example: '12345'
-        serial_number:
-          type: string
-          description: Physical device serial number
-        time_zone:
-          type: string
-          description: IANA time zone for this monitor
-          example: America/Chicago
-        solar_configured:
-          type: boolean
-          description: Whether solar production monitoring is active
-          example: false
-        version:
-          type: string
-          description: Currently installed firmware version
-          example: 1.65.3490-g0f9f5a3
-        signal_check_capable:
-          type: boolean
-          description: Whether the monitor supports signal quality checks
     RealtimePayload:
       type: object
       description: Real-time power snapshot from the monitor
@@ -193,15 +144,64 @@ components:
                 type: number
                 format: float
                 description: Current device power in watts
-  parameters:
-    MonitorId:
-      name: monitor_id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The Sense monitor's unique numeric ID
-      example: '12345'
+    MonitorDetail:
+      type: object
+      description: Detailed monitor information
+      properties:
+        id:
+          type: string
+          description: Unique monitor ID
+          example: '12345'
+        serial_number:
+          type: string
+          description: Physical device serial number
+        time_zone:
+          type: string
+          description: IANA time zone for this monitor
+          example: America/Chicago
+        solar_configured:
+          type: boolean
+          description: Whether solar production monitoring is active
+          example: false
+        version:
+          type: string
+          description: Currently installed firmware version
+          example: 1.65.3490-g0f9f5a3
+        signal_check_capable:
+          type: boolean
+          description: Whether the monitor supports signal quality checks
+    MonitorStatusResponse:
+      type: object
+      description: Monitor status including health and device detection progress
+      properties:
+        monitor_info:
+          type: object
+          properties:
+            version:
+              type: string
+              description: Firmware version string
+              example: 1.65.3490-g0f9f5a3
+            wifi_strength:
+              type: integer
+              description: WiFi signal strength in dBm
+              example: -55
+            ndevices_found:
+              type: integer
+              description: Number of devices detected so far
+              example: 12
+            detection_running:
+              type: boolean
+              description: Whether device detection is actively running
+              example: true
+    MonitorOverviewResponse:
+      type: object
+      description: Full monitor overview including monitor details and account info
+      properties:
+        monitor_overview:
+          type: object
+          properties:
+            monitor:
+              $ref: '#/components/schemas/MonitorDetail'
   securitySchemes:
     BearerAuth:
       type: http

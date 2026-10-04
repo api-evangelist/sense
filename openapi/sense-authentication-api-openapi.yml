@@ -164,6 +164,17 @@ components:
           description: List of Sense monitors associated with the account
           items:
             $ref: '#/components/schemas/MonitorSummary'
+    MFARequired:
+      type: object
+      description: Response when MFA code is required to complete authentication
+      properties:
+        mfa_token:
+          type: string
+          description: Token to pass to the /authenticate/mfa endpoint
+        error_reason:
+          type: string
+          description: Human-readable explanation of why MFA is required
+          example: MFA required
     MonitorSummary:
       type: object
       description: Summary of a Sense monitor returned in authentication responses
@@ -184,17 +195,6 @@ components:
           type: boolean
           description: Whether solar monitoring is configured for this monitor
           example: false
-    MFARequired:
-      type: object
-      description: Response when MFA code is required to complete authentication
-      properties:
-        mfa_token:
-          type: string
-          description: Token to pass to the /authenticate/mfa endpoint
-        error_reason:
-          type: string
-          description: Human-readable explanation of why MFA is required
-          example: MFA required
   securitySchemes:
     BearerAuth:
       type: http
