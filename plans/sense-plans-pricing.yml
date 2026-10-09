@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 name: Sense Plans and Pricing
 description: >-
   Sense operates a one-time hardware purchase model with no recurring
@@ -69,3 +73,32 @@ plans:
       - Energy saving recommendations
       - No hardware installation required
       - Eligible utilities include National Grid, Tipmont, PGE, Rhode Island Energy
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - subscription
+  units: []
+  plans:
+  - name: Sense Home Energy Monitor
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods: []
+  - name: Sense Home Energy Monitor with Solar
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods: []
+  - name: Utility Smart Meter Integration
+    access: other
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods: []
