@@ -82,15 +82,6 @@ paths:
         '401':
           description: Unauthorized
 components:
-  parameters:
-    MonitorId:
-      name: monitor_id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The Sense monitor's unique numeric ID
-      example: '12345'
   schemas:
     RealtimePayload:
       type: object
@@ -144,6 +135,29 @@ components:
                 type: number
                 format: float
                 description: Current device power in watts
+    MonitorStatusResponse:
+      type: object
+      description: Monitor status including health and device detection progress
+      properties:
+        monitor_info:
+          type: object
+          properties:
+            version:
+              type: string
+              description: Firmware version string
+              example: 1.65.3490-g0f9f5a3
+            wifi_strength:
+              type: integer
+              description: WiFi signal strength in dBm
+              example: -55
+            ndevices_found:
+              type: integer
+              description: Number of devices detected so far
+              example: 12
+            detection_running:
+              type: boolean
+              description: Whether device detection is actively running
+              example: true
     MonitorDetail:
       type: object
       description: Detailed monitor information
@@ -170,29 +184,6 @@ components:
         signal_check_capable:
           type: boolean
           description: Whether the monitor supports signal quality checks
-    MonitorStatusResponse:
-      type: object
-      description: Monitor status including health and device detection progress
-      properties:
-        monitor_info:
-          type: object
-          properties:
-            version:
-              type: string
-              description: Firmware version string
-              example: 1.65.3490-g0f9f5a3
-            wifi_strength:
-              type: integer
-              description: WiFi signal strength in dBm
-              example: -55
-            ndevices_found:
-              type: integer
-              description: Number of devices detected so far
-              example: 12
-            detection_running:
-              type: boolean
-              description: Whether device detection is actively running
-              example: true
     MonitorOverviewResponse:
       type: object
       description: Full monitor overview including monitor details and account info
@@ -202,6 +193,15 @@ components:
           properties:
             monitor:
               $ref: '#/components/schemas/MonitorDetail'
+  parameters:
+    MonitorId:
+      name: monitor_id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The Sense monitor's unique numeric ID
+      example: '12345'
   securitySchemes:
     BearerAuth:
       type: http

@@ -95,38 +95,6 @@ paths:
           description: Unauthorized
 components:
   schemas:
-    SolarHistoryResponse:
-      type: object
-      description: Historical solar production and grid exchange data
-      properties:
-        total:
-          type: object
-          properties:
-            production_kwh:
-              type: number
-              format: float
-              description: Total solar energy produced in kWh
-              example: 12.75
-            from_grid_kwh:
-              type: number
-              format: float
-              description: Energy imported from the grid in kWh
-              example: 5.67
-            to_grid_kwh:
-              type: number
-              format: float
-              description: Excess solar energy exported to the grid in kWh
-              example: 2.31
-            net_kwh:
-              type: number
-              format: float
-              description: Net energy (production minus consumption) in kWh
-              example: 7.08
-            solar_percentage:
-              type: number
-              format: float
-              description: Percentage of consumption covered by solar (0-100)
-              example: 68.5
     UsageHistoryResponse:
       type: object
       description: Historical energy consumption data
@@ -166,6 +134,38 @@ components:
                     type: number
                     format: float
                     description: Device's total energy consumption in kWh
+    SolarHistoryResponse:
+      type: object
+      description: Historical solar production and grid exchange data
+      properties:
+        total:
+          type: object
+          properties:
+            production_kwh:
+              type: number
+              format: float
+              description: Total solar energy produced in kWh
+              example: 12.75
+            from_grid_kwh:
+              type: number
+              format: float
+              description: Energy imported from the grid in kWh
+              example: 5.67
+            to_grid_kwh:
+              type: number
+              format: float
+              description: Excess solar energy exported to the grid in kWh
+              example: 2.31
+            net_kwh:
+              type: number
+              format: float
+              description: Net energy (production minus consumption) in kWh
+              example: 7.08
+            solar_percentage:
+              type: number
+              format: float
+              description: Percentage of consumption covered by solar (0-100)
+              example: 68.5
   parameters:
     MonitorId:
       name: monitor_id
