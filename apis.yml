@@ -252,6 +252,8 @@ apis:
   - type: FinOps
     url: finops/sense-finops.yml
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/sense/overview
   - type: AgenticAccess
     url: agentic-access/sense-agentic-access.yml
   - type: DomainSecurity
