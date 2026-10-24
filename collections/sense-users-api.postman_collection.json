@@ -1,295 +1,299 @@
 {
+  "info": {
+    "_postman_id": "107a3722-53e9-493c-9572-8219a0916028",
+    "name": "Sense Client Users API",
+    "description": "The Sense Client REST API provides access to historical trend data and account information for Sense home energy monitors. Authenticated users can retrieve aggregated energy consumption and solar production statistics across configurable time scales including day, week, month, year, and billing cycle. The API returns device-level disaggregation data showing individual appliance consumption, grid exchange metrics, and monitor health information.\n\nContact Support:\n Name: Sense Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:37:40.000Z",
+    "updatedAt": "2026-10-22T01:37:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-107a3722-53e9-493c-9572-8219a0916028"
+  },
   "item": [
     {
-      "id": "25c203cb-b3dc-44ce-b738-86a7ebf9d650",
-      "name": "Users",
-      "description": {
-        "content": "User-level timeline and usage data",
-        "type": "text/plain"
-      },
+      "name": "users",
       "item": [
         {
-          "id": "1692202c-e9a7-4419-b242-709cc79241c3",
-          "name": "Get user usage timeline",
-          "request": {
-            "name": "Get user usage timeline",
-            "description": {
-              "content": "Retrieve a timeline of usage events and device activity for the authenticated user. Supports pagination and filtering by device.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users",
-                ":user_id",
-                "timeline"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "n_items",
-                  "value": "30",
-                  "description": "Number of timeline items to return"
-                },
-                {
-                  "disabled": false,
-                  "key": "device_id",
-                  "value": "<string>",
-                  "description": "Filter results to a specific device ID"
-                },
-                {
-                  "disabled": false,
-                  "key": "prior_to_item",
-                  "value": "<dateTime>",
-                  "description": "Return items prior to this date/time (YYYY-MM-DDTHH:MM:SS.mmmZ)"
-                },
-                {
-                  "disabled": false,
-                  "key": "rollup",
-                  "value": "<string>",
-                  "description": "Optional rollup grouping parameter"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "user_id",
-                  "description": "(Required) The user's Sense user ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{user_id}",
+          "item": [
             {
-              "id": "e41171e6-9536-45f9-8c41-a35b71ec5f1a",
-              "name": "User timeline data",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":user_id",
-                    "timeline"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "n_items",
-                      "value": "30"
-                    },
-                    {
-                      "key": "device_id",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "prior_to_item",
-                      "value": "<dateTime>"
-                    },
-                    {
-                      "key": "rollup",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "user_id",
-                      "description": "(Required) The user's Sense user ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+              "name": "timeline",
+              "item": [
+                {
+                  "name": "Get user usage timeline",
+                  "id": "8078d815-137e-4716-a690-6b43bde203b2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:user_id/timeline?n_items=30&device_id=<string>&prior_to_item=<dateTime>&rollup=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":user_id",
+                        "timeline"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of timeline items to return",
+                          "key": "n_items",
+                          "value": "30"
+                        },
+                        {
+                          "description": "Filter results to a specific device ID",
+                          "key": "device_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Return items prior to this date/time (YYYY-MM-DDTHH:MM:SS.mmmZ)",
+                          "key": "prior_to_item",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Optional rollup grouping parameter",
+                          "key": "rollup",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "260af1d5-e736-4624-b430-fadcc9959b6c",
+                          "key": "user_id",
+                          "value": "<string>",
+                          "description": "(Required) The user's Sense user ID"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a timeline of usage events and device activity for the authenticated user. Supports pagination and filtering by device."
+                  },
+                  "response": [
+                    {
+                      "id": "a8511d21-25b0-49de-bc09-f61ce3b65460",
+                      "name": "User timeline data",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:user_id/timeline?n_items=30&device_id=<string>&prior_to_item=<dateTime>&rollup=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":user_id",
+                            "timeline"
+                          ],
+                          "query": [
+                            {
+                              "description": "Number of timeline items to return",
+                              "key": "n_items",
+                              "value": "30"
+                            },
+                            {
+                              "description": "Filter results to a specific device ID",
+                              "key": "device_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Return items prior to this date/time (YYYY-MM-DDTHH:MM:SS.mmmZ)",
+                              "key": "prior_to_item",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Optional rollup grouping parameter",
+                              "key": "rollup",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"items\": [\n    {\n      \"type\": \"<string>\",\n      \"time\": \"<dateTime>\",\n      \"device_id\": \"<string>\",\n      \"device_name\": \"<string>\",\n      \"user_device_type\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"time\": \"<dateTime>\",\n      \"device_id\": \"<string>\",\n      \"device_name\": \"<string>\",\n      \"user_device_type\": \"<string>\"\n    }\n  ],\n  \"total_items\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T01:37:41.000Z",
+                      "updatedAt": "2026-10-22T01:37:41.000Z",
+                      "uid": "35240-a8511d21-25b0-49de-bc09-f61ce3b65460"
+                    },
+                    {
+                      "id": "612c0399-ab42-4681-8be9-ed85a46eb07a",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:user_id/timeline?n_items=30&device_id=<string>&prior_to_item=<dateTime>&rollup=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":user_id",
+                            "timeline"
+                          ],
+                          "query": [
+                            {
+                              "description": "Number of timeline items to return",
+                              "key": "n_items",
+                              "value": "30"
+                            },
+                            {
+                              "description": "Filter results to a specific device ID",
+                              "key": "device_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Return items prior to this date/time (YYYY-MM-DDTHH:MM:SS.mmmZ)",
+                              "key": "prior_to_item",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Optional rollup grouping parameter",
+                              "key": "rollup",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T01:37:41.000Z",
+                      "updatedAt": "2026-10-22T01:37:41.000Z",
+                      "uid": "35240-612c0399-ab42-4681-8be9-ed85a46eb07a"
+                    },
+                    {
+                      "id": "67187327-790b-42c0-af47-b7ec32719d3f",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:user_id/timeline?n_items=30&device_id=<string>&prior_to_item=<dateTime>&rollup=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":user_id",
+                            "timeline"
+                          ],
+                          "query": [
+                            {
+                              "description": "Number of timeline items to return",
+                              "key": "n_items",
+                              "value": "30"
+                            },
+                            {
+                              "description": "Filter results to a specific device ID",
+                              "key": "device_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Return items prior to this date/time (YYYY-MM-DDTHH:MM:SS.mmmZ)",
+                              "key": "prior_to_item",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Optional rollup grouping parameter",
+                              "key": "rollup",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T01:37:41.000Z",
+                      "updatedAt": "2026-10-22T01:37:41.000Z",
+                      "uid": "35240-67187327-790b-42c0-af47-b7ec32719d3f"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:37:41.000Z",
+                  "updatedAt": "2026-10-22T01:37:41.000Z",
+                  "uid": "35240-8078d815-137e-4716-a690-6b43bde203b2"
                 }
               ],
-              "body": "{\n  \"items\": [\n    {\n      \"type\": \"DeviceWentOn\",\n      \"time\": \"1950-07-13T12:09:54.558Z\",\n      \"device_id\": \"string\",\n      \"device_name\": \"string\",\n      \"user_device_type\": \"string\"\n    },\n    {\n      \"type\": \"DeviceWentOn\",\n      \"time\": \"1981-12-05T14:01:13.621Z\",\n      \"device_id\": \"string\",\n      \"device_name\": \"string\",\n      \"user_device_type\": \"string\"\n    }\n  ],\n  \"total_items\": 4776\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3766b47e-95b5-4d16-a22b-0ce0be085a48",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":user_id",
-                    "timeline"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "n_items",
-                      "value": "30"
-                    },
-                    {
-                      "key": "device_id",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "prior_to_item",
-                      "value": "<dateTime>"
-                    },
-                    {
-                      "key": "rollup",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "user_id",
-                      "description": "(Required) The user's Sense user ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "9fde96f4-82e1-4487-bdaa-e836c2c30dcf",
-              "name": "Forbidden",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":user_id",
-                    "timeline"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "n_items",
-                      "value": "30"
-                    },
-                    {
-                      "key": "device_id",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "prior_to_item",
-                      "value": "<dateTime>"
-                    },
-                    {
-                      "key": "rollup",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "user_id",
-                      "description": "(Required) The user's Sense user ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "id": "a8e944b9-14d2-4941-a114-97827555e3cf",
+              "createdAt": "2026-10-22T01:37:41.000Z",
+              "updatedAt": "2026-10-22T01:37:41.000Z",
+              "uid": "35240-a8e944b9-14d2-4941-a114-97827555e3cf"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "73cbaf50-1948-4445-9d7a-dca42b9ee280",
+          "createdAt": "2026-10-22T01:37:41.000Z",
+          "updatedAt": "2026-10-22T01:37:41.000Z",
+          "uid": "35240-73cbaf50-1948-4445-9d7a-dca42b9ee280"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.sense.com/apiservice/api/v1",
-      "key": "baseUrl"
+      "id": "38ffc3d2-b961-460f-82e5-351fd019f297",
+      "createdAt": "2026-10-22T01:37:41.000Z",
+      "updatedAt": "2026-10-22T01:37:41.000Z",
+      "uid": "35240-38ffc3d2-b961-460f-82e5-351fd019f297"
     }
   ],
   "auth": {
@@ -297,17 +301,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "4bb4c990-f06f-495c-8164-c3a65bd88afa",
-    "name": "Sense Client Authentication Users API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Sense Client REST API provides access to historical trend data and account information for Sense home energy monitors. Authenticated users can retrieve aggregated energy consumption and solar production statistics across configurable time scales including day, week, month, year, and billing cycle. The API returns device-level disaggregation data showing individual appliance consumption, grid exchange metrics, and monitor health information.\n\nContact Support:\n Name: Sense Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.sense.com/apiservice/api/v1"
     }
-  }
+  ]
 }

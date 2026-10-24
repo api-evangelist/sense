@@ -1,707 +1,658 @@
 {
+  "info": {
+    "_postman_id": "7d098faf-8592-47d3-bb35-9640c00f102a",
+    "name": "Sense Client Authentication API",
+    "description": "The Sense Client REST API provides access to historical trend data and account information for Sense home energy monitors. Authenticated users can retrieve aggregated energy consumption and solar production statistics across configurable time scales including day, week, month, year, and billing cycle. The API returns device-level disaggregation data showing individual appliance consumption, grid exchange metrics, and monitor health information.\n\nContact Support:\n Name: Sense Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:37:18.000Z",
+    "updatedAt": "2026-10-22T01:37:19.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7d098faf-8592-47d3-bb35-9640c00f102a"
+  },
   "item": [
     {
-      "id": "cd2bf145-6aef-483f-93af-4e402e63dd05",
-      "name": "Authentication",
-      "description": {
-        "content": "Authenticate and manage sessions",
-        "type": "text/plain"
-      },
+      "name": "authenticate",
       "item": [
         {
-          "id": "b8400aa2-5478-4a08-ba1e-e88594411785",
+          "name": "mfa",
+          "item": [
+            {
+              "name": "Validate MFA code",
+              "id": "692a2ec1-f22b-4d0d-a9d4-0553e4c35ba2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The 6-digit TOTP code from the authenticator app",
+                      "key": "totp",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The mfa_token returned from the initial authenticate call",
+                      "key": "mfa_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Current UTC time in ISO 8601 format",
+                      "key": "client_time",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/authenticate/mfa",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "authenticate",
+                    "mfa"
+                  ]
+                },
+                "description": "Validate a Time-based One-Time Password (TOTP) code after initial authentication returned a 401 with an mfa_token. On success returns full auth credentials identical to the /authenticate response."
+              },
+              "response": [
+                {
+                  "id": "92f8b428-0736-47d7-9ade-b1da729373cf",
+                  "name": "MFA validated, authentication complete",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The 6-digit TOTP code from the authenticator app",
+                          "key": "totp",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The mfa_token returned from the initial authenticate call",
+                          "key": "mfa_token",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Current UTC time in ISO 8601 format",
+                          "key": "client_time",
+                          "value": "<dateTime>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/authenticate/mfa",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "authenticate",
+                        "mfa"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"access_token\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"refresh_token\": \"<string>\",\n  \"monitors\": [\n    {\n      \"id\": \"<string>\",\n      \"serial_number\": \"<string>\",\n      \"time_zone\": \"<string>\",\n      \"solar_configured\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"serial_number\": \"<string>\",\n      \"time_zone\": \"<string>\",\n      \"solar_configured\": \"<boolean>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T01:37:19.000Z",
+                  "updatedAt": "2026-10-22T01:37:19.000Z",
+                  "uid": "35240-92f8b428-0736-47d7-9ade-b1da729373cf"
+                },
+                {
+                  "id": "5e05e9d5-f11b-4f25-a872-4297c753b7af",
+                  "name": "Invalid MFA code",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The 6-digit TOTP code from the authenticator app",
+                          "key": "totp",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The mfa_token returned from the initial authenticate call",
+                          "key": "mfa_token",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Current UTC time in ISO 8601 format",
+                          "key": "client_time",
+                          "value": "<dateTime>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/authenticate/mfa",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "authenticate",
+                        "mfa"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:37:19.000Z",
+                  "updatedAt": "2026-10-22T01:37:19.000Z",
+                  "uid": "35240-5e05e9d5-f11b-4f25-a872-4297c753b7af"
+                }
+              ],
+              "createdAt": "2026-10-22T01:37:19.000Z",
+              "updatedAt": "2026-10-22T01:37:19.000Z",
+              "uid": "35240-692a2ec1-f22b-4d0d-a9d4-0553e4c35ba2"
+            }
+          ],
+          "id": "554c8580-c2e1-4b4e-91d3-fe1dce895d69",
+          "createdAt": "2026-10-22T01:37:19.000Z",
+          "updatedAt": "2026-10-22T01:37:19.000Z",
+          "uid": "35240-554c8580-c2e1-4b4e-91d3-fe1dce895d69"
+        },
+        {
           "name": "Authenticate with email and password",
+          "id": "c8ad8da1-ad8c-474a-98ab-df58cc9b7ebe",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Authenticate with email and password",
-            "description": {
-              "content": "Authenticate with a Sense account using email and password. Returns an access token, user ID, refresh token, and a list of associated monitors. If MFA is enabled, a 401 with an mfa_token is returned requiring a follow-up call to /authenticate/mfa.",
-              "type": "text/plain"
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "description": "(Required) The user's Sense account email address",
+                  "key": "email",
+                  "value": "<email>"
+                },
+                {
+                  "description": "(Required) The user's Sense account password",
+                  "key": "password",
+                  "value": "<string>"
+                }
+              ]
             },
             "url": {
+              "raw": "{{baseUrl}}/authenticate",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "authenticate"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "email",
-                  "value": "<email>",
-                  "description": "(Required) The user's Sense account email address"
-                },
-                {
-                  "disabled": false,
-                  "key": "password",
-                  "value": "<password>",
-                  "description": "(Required) The user's Sense account password"
-                }
               ]
-            }
+            },
+            "description": "Authenticate with a Sense account using email and password. Returns an access token, user ID, refresh token, and a list of associated monitors. If MFA is enabled, a 401 with an mfa_token is returned requiring a follow-up call to /authenticate/mfa."
           },
           "response": [
             {
-              "id": "4875d496-3bb1-4d57-b94d-360eb275bd5f",
+              "id": "ff93e1da-d7c2-4ac0-8d86-622d42106759",
               "name": "Successful authentication",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "authenticate"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "urlencoded",
                   "urlencoded": [
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The user's Sense account email address",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) The user's Sense account email address",
                       "key": "email",
-                      "value": "user@example.com"
+                      "value": "<email>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The user's Sense account password",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) The user's Sense account password",
                       "key": "password",
-                      "value": "<password>"
+                      "value": "<string>"
                     }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/authenticate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "authenticate"
                   ]
                 }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"user_id\": \"654321\",\n  \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"monitors\": [\n    {\n      \"id\": \"12345\",\n      \"serial_number\": \"SN1234567890\",\n      \"time_zone\": \"America/New_York\",\n      \"solar_configured\": false\n    },\n    {\n      \"id\": \"12345\",\n      \"serial_number\": \"SN1234567890\",\n      \"time_zone\": \"America/New_York\",\n      \"solar_configured\": false\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"access_token\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"refresh_token\": \"<string>\",\n  \"monitors\": [\n    {\n      \"id\": \"<string>\",\n      \"serial_number\": \"<string>\",\n      \"time_zone\": \"<string>\",\n      \"solar_configured\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"serial_number\": \"<string>\",\n      \"time_zone\": \"<string>\",\n      \"solar_configured\": \"<boolean>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-22T01:37:19.000Z",
+              "updatedAt": "2026-10-22T01:37:19.000Z",
+              "uid": "35240-ff93e1da-d7c2-4ac0-8d86-622d42106759"
             },
             {
-              "id": "d54e04b2-1f75-4d61-923e-f09c2e30878d",
+              "id": "1c0b3969-298a-40cb-8263-171b5317b6c9",
               "name": "Authentication failed or MFA required",
               "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The user's Sense account email address",
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "description": "(Required) The user's Sense account password",
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ]
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/authenticate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "authenticate"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "urlencoded",
-                  "urlencoded": [
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The user's Sense account email address",
-                        "type": "text/plain"
-                      },
-                      "key": "email",
-                      "value": "user@example.com"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The user's Sense account password",
-                        "type": "text/plain"
-                      },
-                      "key": "password",
-                      "value": "<password>"
-                    }
                   ]
                 }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"mfa_token\": \"string\",\n  \"error_reason\": \"MFA required\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"mfa_token\": \"<string>\",\n  \"error_reason\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T01:37:19.000Z",
+              "updatedAt": "2026-10-22T01:37:19.000Z",
+              "uid": "35240-1c0b3969-298a-40cb-8263-171b5317b6c9"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e9a6a5b8-cbdc-4c8d-b21b-089f31d8e5d6",
-          "name": "Validate MFA code",
-          "request": {
-            "name": "Validate MFA code",
-            "description": {
-              "content": "Validate a Time-based One-Time Password (TOTP) code after initial authentication returned a 401 with an mfa_token. On success returns full auth credentials identical to the /authenticate response.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "authenticate",
-                "mfa"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "totp",
-                  "value": "<string>",
-                  "description": "(Required) The 6-digit TOTP code from the authenticator app"
-                },
-                {
-                  "disabled": false,
-                  "key": "mfa_token",
-                  "value": "<string>",
-                  "description": "(Required) The mfa_token returned from the initial authenticate call"
-                },
-                {
-                  "disabled": false,
-                  "key": "client_time",
-                  "value": "<dateTime>",
-                  "description": "(Required) Current UTC time in ISO 8601 format"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "d9e4495f-8c85-4047-935a-3a474905db3d",
-              "name": "MFA validated, authentication complete",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "authenticate",
-                    "mfa"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "urlencoded",
-                  "urlencoded": [
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The 6-digit TOTP code from the authenticator app",
-                        "type": "text/plain"
-                      },
-                      "key": "totp",
-                      "value": "123456"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The mfa_token returned from the initial authenticate call",
-                        "type": "text/plain"
-                      },
-                      "key": "mfa_token",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) Current UTC time in ISO 8601 format",
-                        "type": "text/plain"
-                      },
-                      "key": "client_time",
-                      "value": "2026-06-13T12:00:00Z"
-                    }
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"user_id\": \"654321\",\n  \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"monitors\": [\n    {\n      \"id\": \"12345\",\n      \"serial_number\": \"SN1234567890\",\n      \"time_zone\": \"America/New_York\",\n      \"solar_configured\": false\n    },\n    {\n      \"id\": \"12345\",\n      \"serial_number\": \"SN1234567890\",\n      \"time_zone\": \"America/New_York\",\n      \"solar_configured\": false\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "83b4bf51-17af-4b0c-ab35-99e14b9936d1",
-              "name": "Invalid MFA code",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "authenticate",
-                    "mfa"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "urlencoded",
-                  "urlencoded": [
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The 6-digit TOTP code from the authenticator app",
-                        "type": "text/plain"
-                      },
-                      "key": "totp",
-                      "value": "123456"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The mfa_token returned from the initial authenticate call",
-                        "type": "text/plain"
-                      },
-                      "key": "mfa_token",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) Current UTC time in ISO 8601 format",
-                        "type": "text/plain"
-                      },
-                      "key": "client_time",
-                      "value": "2026-06-13T12:00:00Z"
-                    }
-                  ]
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "b4f00bd9-77c8-4202-a621-abb74047fef4",
-          "name": "Renew access token using refresh token",
-          "request": {
-            "name": "Renew access token using refresh token",
-            "description": {
-              "content": "Exchange a refresh token for a new access token. Call this when the current access token is expired (401 response from any authenticated endpoint).",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "renew"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "user_id",
-                  "value": "<string>",
-                  "description": "(Required) The user's Sense user ID from the original auth response"
-                },
-                {
-                  "disabled": false,
-                  "key": "refresh_token",
-                  "value": "<string>",
-                  "description": "(Required) The refresh token from the original auth response"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "fa78a44a-7054-48c9-be7b-1b4dec2ea70e",
-              "name": "Token renewed successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "renew"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "urlencoded",
-                  "urlencoded": [
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The user's Sense user ID from the original auth response",
-                        "type": "text/plain"
-                      },
-                      "key": "user_id",
-                      "value": "123456"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The refresh token from the original auth response",
-                        "type": "text/plain"
-                      },
-                      "key": "refresh_token",
-                      "value": "<string>"
-                    }
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"user_id\": \"654321\",\n  \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"monitors\": [\n    {\n      \"id\": \"12345\",\n      \"serial_number\": \"SN1234567890\",\n      \"time_zone\": \"America/New_York\",\n      \"solar_configured\": false\n    },\n    {\n      \"id\": \"12345\",\n      \"serial_number\": \"SN1234567890\",\n      \"time_zone\": \"America/New_York\",\n      \"solar_configured\": false\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "dd2f7059-7160-4856-b6a8-838a0a3a15bc",
-              "name": "Refresh token invalid or expired",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "renew"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "urlencoded",
-                  "urlencoded": [
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The user's Sense user ID from the original auth response",
-                        "type": "text/plain"
-                      },
-                      "key": "user_id",
-                      "value": "123456"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The refresh token from the original auth response",
-                        "type": "text/plain"
-                      },
-                      "key": "refresh_token",
-                      "value": "<string>"
-                    }
-                  ]
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e3d35915-1aa9-40e6-9c6f-5acbba6a712a",
-          "name": "Log out and invalidate the current session",
-          "request": {
-            "name": "Log out and invalidate the current session",
-            "description": {
-              "content": "Invalidates the current access token and ends the session.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "logout"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "0a0cbc3f-9e91-466f-9ff2-e0af15833f4e",
-              "name": "Successfully logged out",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "logout"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "c621bbc1-a74f-4779-95ac-bce1259c70e1",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "logout"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T01:37:19.000Z",
+          "updatedAt": "2026-10-22T01:37:19.000Z",
+          "uid": "35240-c8ad8da1-ad8c-474a-98ab-df58cc9b7ebe"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
+      "id": "986566ff-6d50-4b36-9d05-65dfedfe0e8b",
+      "createdAt": "2026-10-22T01:37:19.000Z",
+      "updatedAt": "2026-10-22T01:37:19.000Z",
+      "uid": "35240-986566ff-6d50-4b36-9d05-65dfedfe0e8b"
+    },
     {
-      "type": "string",
-      "value": "https://api.sense.com/apiservice/api/v1",
-      "key": "baseUrl"
+      "name": "renew",
+      "item": [
+        {
+          "name": "Renew access token using refresh token",
+          "id": "9fad6ebb-9224-4938-9227-aff7a0524ff1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "description": "(Required) The user's Sense user ID from the original auth response",
+                  "key": "user_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) The refresh token from the original auth response",
+                  "key": "refresh_token",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/renew",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "renew"
+              ]
+            },
+            "description": "Exchange a refresh token for a new access token. Call this when the current access token is expired (401 response from any authenticated endpoint)."
+          },
+          "response": [
+            {
+              "id": "108f81c0-5949-482a-a93e-66fe24cb2918",
+              "name": "Token renewed successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The user's Sense user ID from the original auth response",
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The refresh token from the original auth response",
+                      "key": "refresh_token",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/renew",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "renew"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"access_token\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"refresh_token\": \"<string>\",\n  \"monitors\": [\n    {\n      \"id\": \"<string>\",\n      \"serial_number\": \"<string>\",\n      \"time_zone\": \"<string>\",\n      \"solar_configured\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"serial_number\": \"<string>\",\n      \"time_zone\": \"<string>\",\n      \"solar_configured\": \"<boolean>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-22T01:37:19.000Z",
+              "updatedAt": "2026-10-22T01:37:19.000Z",
+              "uid": "35240-108f81c0-5949-482a-a93e-66fe24cb2918"
+            },
+            {
+              "id": "07244517-5d30-4936-b508-ed790b6d9d52",
+              "name": "Refresh token invalid or expired",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The user's Sense user ID from the original auth response",
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The refresh token from the original auth response",
+                      "key": "refresh_token",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/renew",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "renew"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-22T01:37:19.000Z",
+              "updatedAt": "2026-10-22T01:37:19.000Z",
+              "uid": "35240-07244517-5d30-4936-b508-ed790b6d9d52"
+            }
+          ],
+          "createdAt": "2026-10-22T01:37:19.000Z",
+          "updatedAt": "2026-10-22T01:37:19.000Z",
+          "uid": "35240-9fad6ebb-9224-4938-9227-aff7a0524ff1"
+        }
+      ],
+      "id": "69c6ba34-51cf-43fc-8625-a88576de9043",
+      "createdAt": "2026-10-22T01:37:19.000Z",
+      "updatedAt": "2026-10-22T01:37:19.000Z",
+      "uid": "35240-69c6ba34-51cf-43fc-8625-a88576de9043"
+    },
+    {
+      "name": "logout",
+      "item": [
+        {
+          "name": "Log out and invalidate the current session",
+          "id": "06eabc75-7e2b-4cb6-95ce-8e87a64298ae",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "logout"
+              ]
+            },
+            "description": "Invalidates the current access token and ends the session."
+          },
+          "response": [
+            {
+              "id": "9a6ac516-16f8-4923-8cf1-7de07d479210",
+              "name": "Successfully logged out",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/logout",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "logout"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-22T01:37:19.000Z",
+              "updatedAt": "2026-10-22T01:37:19.000Z",
+              "uid": "35240-9a6ac516-16f8-4923-8cf1-7de07d479210"
+            },
+            {
+              "id": "c0375f84-a02b-476b-8751-93633ee8b5e6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/logout",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "logout"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-22T01:37:19.000Z",
+              "updatedAt": "2026-10-22T01:37:19.000Z",
+              "uid": "35240-c0375f84-a02b-476b-8751-93633ee8b5e6"
+            }
+          ],
+          "createdAt": "2026-10-22T01:37:19.000Z",
+          "updatedAt": "2026-10-22T01:37:19.000Z",
+          "uid": "35240-06eabc75-7e2b-4cb6-95ce-8e87a64298ae"
+        }
+      ],
+      "id": "9c61954d-7bda-4ba9-905a-0294a254d9ad",
+      "createdAt": "2026-10-22T01:37:19.000Z",
+      "updatedAt": "2026-10-22T01:37:19.000Z",
+      "uid": "35240-9c61954d-7bda-4ba9-905a-0294a254d9ad"
     }
   ],
   "auth": {
@@ -709,17 +660,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "52b50a34-8084-477a-a6d9-dd89d6375bb1",
-    "name": "Sense Client Authentication API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Sense Client REST API provides access to historical trend data and account information for Sense home energy monitors. Authenticated users can retrieve aggregated energy consumption and solar production statistics across configurable time scales including day, week, month, year, and billing cycle. The API returns device-level disaggregation data showing individual appliance consumption, grid exchange metrics, and monitor health information.\n\nContact Support:\n Name: Sense Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.sense.com/apiservice/api/v1"
     }
-  }
+  ]
 }
